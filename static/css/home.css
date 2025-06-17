@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inria Serif', serif;
+  background: linear-gradient(to bottom, #f8a5c2, #fff);
+  color: #5e2c3c;
+  overflow-x: hidden;
+}
+
+.header {
+  position: relative;
+  background-color: #f8a5c2;
+  padding: 1rem;
+  text-align: center;
+}
+
+.branding {
+  margin-bottom: 1rem;
+}
+
+.logo {
+  height: 20vh;
+  width: 40vh;
+  margin-bottom: 0.5rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+}
+
+.header p {
+  font-size: 1rem;
+}
+
+.icons {
+  position: absolute;
+  top: 1rem;
+  right: 3rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.icons a {
+  text-decoration: none;
+}
+
+.icon {
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.drip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url('../images/drip.png') no-repeat;
+  background-size: contain;
+  width: 50vh;
+  height: 30vh;
+}
+
+.collections {
+  padding: 2rem 1rem;
+  background: #f8a5c2;
+}
+
+.collection h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.gallery-container {
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;
+}
+
+.gallery {
+  display: flex;
+  gap: 1rem;
+  min-width: max-content;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 180px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 18vh;
+  height: 25vh;
+  display: block;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: inherit;
+}
+
+.buy-btn {
+  background-color: #d07b91;
+  border: none;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.heart {
+  font-size: 1rem;
+  color: red;
+}

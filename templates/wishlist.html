@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wishlist</title>
+    <link rel="stylesheet" href="../static/css/wishlist.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inria+Serif&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="page-bg">
+      <img
+        src="../static/images/page-bg.png"
+        alt="Background"
+        class="bg-image"
+      />
+    </div>
+    <div class="wishlist-container">
+      <div class="wishlist-header">
+        <div class="wishlist-text">
+        <h1>Wishlist</h1>
+        </div>
+        <div class="wishlist-icons">
+          <h1><a href="{{ url_for('wishlist') }}"><span class="heart">❤️</span></a></h1>
+          <h1><a><span class="cart">🛒</span></a></h1>
+          <h1><a href="{{ url_for('home') }}">🏠</a></h1>
+        </div>
+      </div>
+
+      <div class="wishlist-content">
+        <h2 class="wishlist-title">Elegance on Hold <span>♥</span></h2>
+
+        <div class="wishlist-grid">
+          <div class="wishlist-card">
+            <img src="../static/images/black/design1.png" alt="Nail Design 1" />
+            <button class="remove-btn">
+              <i class="fas fa-times-circle"></i>
+            </button>
+            <div class="card-footer">
+              <span>$29</span>
+              <button>🗑️</button>
+              <button class="add-btn">
+                Add to Cart <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="wishlist-card">
+            <img src="images/nail2.jpg" alt="Nail Design 2" />
+            <button class="remove-btn">
+              <i class="fas fa-times-circle"></i>
+            </button>
+            <div class="card-footer">
+              <span>$34</span>
+              <button>🗑️</button>
+              <button class="add-btn">
+                Add to Cart <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="wishlist-card">
+            <img src="images/nail3.jpg" alt="Nail Design 3" />
+            <button class="remove-btn">
+              <i class="fas fa-times-circle"></i>
+            </button>
+            <div class="card-footer">
+              <span>$29</span>
+              <button>🗑️</button>
+              <button class="add-btn">
+                Add to Cart <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="wishlist-card">
+            <img src="images/nail4.jpg" alt="Nail Design 4" />
+            <button class="remove-btn">
+              <i class="fas fa-times-circle"></i>
+            </button>
+            <div class="card-footer">
+              <span>$39</span>
+              <button>🗑️</button>
+              <button class="add-btn">
+                Add to Cart <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
