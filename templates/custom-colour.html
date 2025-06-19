@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nail It Your Way</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inria+Serif&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../static/css/custom-colour.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <img
+        src="../static/images/custom-bg.png"
+        alt="Background"
+        class="background-img"
+      />
+
+      <div class="text-heading">Nail It Your Way!</div>
+
+      <div class="shape-selector">
+        <h3>Select Colour</h3>
+        <div class="shape-grid">
+          <div class="shape-button"><img src="../static/images/Custom/Colours/red.png"></div>
+          <div class="shape-button"><img src="../static/images/Custom/Colours/yellow.png"></div>
+          <div class="shape-button"><img src="../static/images/Custom/Colours/blue.png"></div>
+          <div class="shape-button"><img src="../static/images/Custom/Colours/green.png"></div>
+          <div class="shape-button"><img src="../static/images/Custom/Colours/purple.png"></div>
+          <div class="shape-button"><img src="../static/images/Custom/Colours/pink.png"></div>
+        </div>
+      </div>
+
+      <div class="arrow-button">&#8250;</div>
+    </div>
+  </body>
+  <script>
+    const shapeGrid = document.querySelector(".shape-grid");
+    let isDragging = false;
+    let lastAngle = 0;
+    let startAngle = 0;
+
+    const getAngle = (e) => {
+      const rect = shapeGrid.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const x = e.clientX - cx;
+      const y = e.clientY - cy;
+      return Math.atan2(y, x) * (180 / Math.PI);
+    };
+
+    shapeGrid.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      startAngle = getAngle(e) - lastAngle;
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      const angle = getAngle(e) - startAngle;
+      shapeGrid.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+      lastAngle = angle;
+    });
+
+    document.addEventListener("mouseup", () => {
+      isDragging = false;
+    });
+  </script>
+</html>

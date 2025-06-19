@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Bag - Nail Store</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../static/css/checkout.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <img
+        src="../static/images/checkout-bg.png"
+        alt="Background"
+        class="background-img"
+      />
+      <header>
+        <div>&larr; <span style="opacity: 0.5">Shopping Bag</span></div>
+        <div class="icons">
+          <a href="{{ url_for('wishlist') }}"><i class="icon">❤️</i></a>
+          <a href=""><i class="icon">👤</i></a>
+          <a href=""><i class="icon">🛒</i></a>
+          <a href="{{ url_for('home') }}"><i class="icon">🏠</i></a>
+        </div>
+      </header>
+
+      <div class="title">
+        Ready to Press, Just Checkout! <span class="sparkles">✨✨</span>
+      </div>
+
+      <div class="cart-section">
+        <div class="cart-item">
+          <img src="nail1.jpg" alt="Set 1" />
+          <div class="cart-details">
+            <h4>Funky, floral, fierce—just like you ♥</h4>
+            <p>Groove & Gloss</p>
+            <p>
+              $29 &nbsp;&nbsp;
+              <select>
+                <option>Qty: 1</option>
+              </select>
+            </p>
+            <p>✔ Delivery in 7 days</p>
+          </div>
+          <div class="remove">×</div>
+        </div>
+
+        <div class="cart-item">
+          <img src="nail2.jpg" alt="Set 2" />
+          <div class="cart-details">
+            <h4>Sweet, subtle, and oh-so-stylish ♥</h4>
+            <p>Honey Haze</p>
+            <p>
+              $29 &nbsp;&nbsp;
+              <select>
+                <option>Qty: 1</option>
+              </select>
+            </p>
+            <p>✔ Delivery in 7 days</p>
+          </div>
+          <div class="remove">×</div>
+        </div>
+
+        <div class="cart-item">
+          <img src="nail3.jpg" alt="Set 3" />
+          <div class="cart-details">
+            <h4>For bold days and espresso vibes ♥</h4>
+            <p>Cocoa Crush</p>
+            <p>
+              $39 &nbsp;&nbsp;
+              <select>
+                <option>Qty: 1</option>
+              </select>
+            </p>
+            <p>✔ Delivery in 7 days</p>
+          </div>
+          <div class="remove">×</div>
+        </div>
+      </div>
+
+      <!-- <div class="coupon-section">
+        <h3>Coupons</h3>
+        <div class="best-coupon">% Best Coupons For You</div>
+        <div style="height: 100px; background: #fff; margin-top: 10px"></div>
+      </div> -->
+    </div>
+  </body>
+</html>

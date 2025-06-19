@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+body {
+  background: url("../images/custom-bg.png") no-repeat center/cover;
+  position: relative;
+  min-height: 100vh;
+}
+
+.overlay {
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 40px;
+}
+
+.icons-bar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.icons-bar img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+h1 {
+  position: absolute;
+  right: 37vh;
+  top: 30vh;
+  font-family: "Fredericka the Great", cursive;
+  font-size: 3em;
+  margin-bottom: 40px;
+  color: #4e2d2d;
+  text-align: right;
+}
+
+.menu {
+  position: absolute;
+  top: 40vh;
+  right: 40vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 600px;
+}
+
+.menu-item {
+  background: white;
+  border-radius: 20px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+}
+
+.menu-item img {
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.menu-item p {
+  font-weight: bold;
+  color: #b44666;
+}
+
+.arrow-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #d47b9c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2em;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.icons {
+  position: absolute;
+  top: 1rem;
+  right: 3rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.icons a {
+  text-decoration: none;
+}
+
+.icon {
+  font-size: 3rem;
+  cursor: pointer;
+}
