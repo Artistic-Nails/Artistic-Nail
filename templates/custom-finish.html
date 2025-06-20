@@ -26,13 +26,13 @@
           <img src="../static/images/Custom/Home/instructions.png" alt="Instructions" />
           <p>Add Instructions</p>
         </div>
-        <div class="menu-item">
+        <a href="{{ url_for('add_custom') }}"><div class="menu-item">
           <img
             src="../static/images/Custom/Home/saved.png"
             alt="Save Design"
           />
           <p>Save Design</p>
-        </div>
+        </div></a>
         <div class="menu-item">
           <img
             src="../static/images/Custom/Home/share.png"
@@ -40,13 +40,13 @@
           />
           <p>Share Design</p>
         </div>
-        <div class="menu-item">
+        <a href="{{ url_for('add_custom_cart') }}"><div class="menu-item">
           <img
             src="../static/images/Custom/Home/cart.png"
             alt="Add to Cart"
           />
           <p>Add to Cart</p>
-        </div>
+        </div></a>
       </div>
     </div>
 

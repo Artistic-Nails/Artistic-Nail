@@ -19,51 +19,83 @@
       />
 
       <div class="text-heading">Nail It Your Way!</div>
+      <form id="shapeForm" method="POST" action="{{ url_for('save_colour') }}">
+        <input type="hidden" name="selected_shape" id="selectedShapeInput" />
 
-      <div class="shape-selector">
-        <h3>Select Colour</h3>
-        <div class="shape-grid">
-          <div class="shape-button"><img src="../static/images/Custom/Colours/red.png"></div>
-          <div class="shape-button"><img src="../static/images/Custom/Colours/yellow.png"></div>
-          <div class="shape-button"><img src="../static/images/Custom/Colours/blue.png"></div>
-          <div class="shape-button"><img src="../static/images/Custom/Colours/green.png"></div>
-          <div class="shape-button"><img src="../static/images/Custom/Colours/purple.png"></div>
-          <div class="shape-button"><img src="../static/images/Custom/Colours/pink.png"></div>
+        <div class="shape-selector">
+          <h3>Select Shape</h3>
+          <div class="shape-grid">
+            <div class="shape-button" data-colour="red">
+              <img src="../static/images/Custom/Colours/red.png" />
+            </div>
+            <div class="shape-button" data-colour="yellow">
+              <img src="../static/images/Custom/Colours/yellow.png" />
+            </div>
+            <div class="shape-button" data-colour="blue">
+              <img src="../static/images/Custom/Colours/blue.png" />
+            </div>
+            <div class="shape-button" data-colour="green">
+              <img src="../static/images/Custom/Colours/green.png" />
+            </div>
+            <div class="shape-button" data-colour="purple">
+              <img src="../static/images/Custom/Colours/purple.png" />
+            </div>
+            <div class="shape-button" data-colour="pink">
+              <img src="../static/images/Custom/Colours/pink.png" />
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="arrow-button">&#8250;</div>
+        <button type="submit" class="arrow-button">&#8250;</button>
+            </form>
     </div>
   </body>
   <script>
-    const shapeGrid = document.querySelector(".shape-grid");
-    let isDragging = false;
-    let lastAngle = 0;
-    let startAngle = 0;
+      const shapeGrid = document.querySelector(".shape-grid");
+      let isDragging = false;
+      let lastAngle = 0;
+      let startAngle = 0;
 
-    const getAngle = (e) => {
-      const rect = shapeGrid.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const x = e.clientX - cx;
-      const y = e.clientY - cy;
-      return Math.atan2(y, x) * (180 / Math.PI);
-    };
+      const getAngle = (e) => {
+        const rect = shapeGrid.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const x = e.clientX - cx;
+        const y = e.clientY - cy;
+        return Math.atan2(y, x) * (180 / Math.PI);
+      };
 
-    shapeGrid.addEventListener("mousedown", (e) => {
-      isDragging = true;
-      startAngle = getAngle(e) - lastAngle;
-    });
+      shapeGrid.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startAngle = getAngle(e) - lastAngle;
+      });
 
-    document.addEventListener("mousemove", (e) => {
-      if (!isDragging) return;
-      const angle = getAngle(e) - startAngle;
-      shapeGrid.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-      lastAngle = angle;
-    });
+      document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        const angle = getAngle(e) - startAngle;
+        shapeGrid.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+        lastAngle = angle;
+      });
 
-    document.addEventListener("mouseup", () => {
-      isDragging = false;
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+    const shapeButtons = document.querySelectorAll(".shape-button");
+    const selectedShapeInput = document.getElementById("selectedShapeInput");
+
+    shapeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        shapeButtons.forEach((btn) => {
+          btn.classList.remove("selected");
+          btn.classList.add("greyed-out");
+        });
+
+        button.classList.add("selected");
+        button.classList.remove("greyed-out");
+
+        const shapeValue = button.getAttribute("data-colour");
+        selectedShapeInput.value = shapeValue;
+      });
     });
   </script>
 </html>

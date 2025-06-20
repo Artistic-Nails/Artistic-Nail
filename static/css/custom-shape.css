@@ -182,3 +182,18 @@ body {
 .shape-grid:active {
   cursor: grabbing;
 }
+
+/* Selected Shape */
+.shape-button.selected img {
+  filter: none;
+  border: 3px solid #d0728b;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+/* Greyed-Out Shape */
+.shape-button.greyed-out img {
+  filter: grayscale(100%) brightness(0.6);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}

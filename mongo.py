@@ -4,9 +4,9 @@ from pymongo import MongoClient
 
 # Configure Cloudinary
 cloudinary.config(
-    cloud_name='dw3qxw3vs',
-    api_key='425953968713555',
-    api_secret='xj7e2GXtmQa-Yh02abBTxBi7t30'
+    cloud_name='dbp6sexpx',
+    api_key='855881274985551',
+    api_secret='iPU73Wz1slq9EwnRQHJdAaRznKE'
 )
 
 # MongoDB Atlas setup
@@ -35,6 +35,26 @@ def insert_product(shape, colour, design, price, image):
         result = collection.insert_one(product)
         print(f"✅ Inserted as {result.inserted_id}")
         return True
+
+    except Exception as e:
+        print(f"❌ Failed to upload or insert: {e}")
+        return False
+    
+def insert_custom_product(shape, colour):
+    try:
+        # Create product dictionary
+        product = {
+            "shape": shape.capitalize(),
+            "colour": colour.capitalize(),
+            "design": "",
+            "custom": True,
+            "price": 150,
+            "image": "https://res.cloudinary.com/dbp6sexpx/image/upload/v1750451063/ChatGPT_Image_Jun_21_2025_HTML_CSS_Code_e6qbad.png"
+        }
+
+        result = collection.insert_one(product)
+        print(f"✅ Inserted as {result.inserted_id}")
+        return result.inserted_id
 
     except Exception as e:
         print(f"❌ Failed to upload or insert: {e}")

@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired, Length, EqualTo, Email
 from werkzeug.security import check_password_hash
 from flask_bcrypt import Bcrypt
 from mongoload import getProducts, getOrders
-from mongo import insert_product
+from mongo import insert_product, insert_custom_product
 from check_user import checkUser
 from add_user import addUser
 from classes import User, Admin
@@ -104,9 +104,10 @@ def wishlist():
 
 @app.route("/custom")
 def custom():
+    session["custom"] = list()
     return render_template("custom.html")
 
-@app.route("/custom_shape")
+@app.route("/custom_shape", methods=["GET", "POST"])
 def custom_shape():
     return render_template("custom-shape.html")
 
@@ -239,12 +240,26 @@ def add_to_cart():
 @app.route("/remove_from_cart")
 def remove_from_cart():
     pid = request.args.get("pid")
-    if pid:
+    if not pid:
+        flash("Invalid product ID", "danger")
+        return redirect(url_for("checkout"))
+
+    if current_user.is_authenticated:
+        # Logged-in user: remove from MongoDB cart
         customers.update_one(
             {"_id": ObjectId(current_user.id)},
             {"$pull": {"cart": pid}}
         )
-        flash("Removed from wishlist", "info")
+        flash("Removed from cart", "info")
+    else:
+        # Guest user: remove from session cart
+        if "cart" in session and pid in session["cart"]:
+            session["cart"].remove(pid)
+            session.modified = True
+            flash("Removed from cart (guest)", "info")
+        else:
+            flash("Item not in cart (guest)", "warning")
+
     return redirect(url_for("checkout"))
 
 @app.route("/remove_product")
@@ -270,6 +285,43 @@ def add_product():
         insert_product(shape, colour, design, price, image)
 
     return redirect(url_for("products"))
+
+@app.route('/save_shape', methods=['GET', 'POST'])
+def save_shape():
+    selected_shape = request.form.get('selected_shape')
+    session["custom"] = {}
+    session["custom"]["shape"] = selected_shape
+
+    # Save it to session or DB if needed
+    # session['shape'] = selected_shape
+
+    return redirect(url_for('custom_colour'))  # or render a page
+
+@app.route('/save_colour', methods=['GET', 'POST'])
+def save_colour():
+    selected_colour = request.form.get('selected_shape')
+    print("User selected colour:", selected_colour)
+    session["custom"]["colour"] = selected_colour
+    print(session["custom"])
+    session.modified = True
+
+    # Save it to session or DB if needed
+    # session['shape'] = selected_shape
+
+    return redirect(url_for('custom_finish'))  # or render a page
+
+@app.route('/add_custom')
+def add_custom():
+    custom_products = session["custom"]
+    insert_custom_product(custom_products["shape"], custom_products["colour"])
+    return redirect(url_for("custom_finish"))
+
+@app.route("/add_custom_cart")
+def add_custom_cart():
+    custom_products = session["custom"]
+    pid = insert_custom_product(custom_products["shape"], custom_products["colour"])
+
+    return redirect(url_for("add_to_cart", pid=pid))
 
 @app.route("/logout")
 def logout():
