@@ -11,8 +11,9 @@ cloudinary.config(
 )
 
 # MongoDB Atlas setup
-client = MongoClient("mongodb+srv://nevarycolab:1F0J6rXtdrC0zi1X@cluster0.ohuk50d.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-db = client["nailArt"]
+uri = "mongodb+srv://artisticnailsbyharman:QLbPCWSz9VHKnO3t@cluster0.mbnwbwo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+client = MongoClient(uri)
+db = client["ArtisticNails"]
 collection = db["Products"]
 
 try:        

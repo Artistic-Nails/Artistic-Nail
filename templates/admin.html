@@ -1,0 +1,43 @@
+<!-- Admin Main Dashboard -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Nail It</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <link href="../static/css/admin.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Admin Dashboard</h1>
+    <span>Welcome, Admin</span>
+  </header>
+
+  <div class="dashboard">
+    <div class="card">
+      <h3>Total Orders</h3>
+      <p>{{ orders }} All Time</p>
+      <a href="{{ url_for('see_orders') }}" class="link-btn">View Orders</a>
+    </div>
+
+    <div class="card">
+      <h3>New Users</h3>
+      <p>34 registered</p>
+      <a href="#" class="link-btn">View Users</a>
+    </div>
+
+    <div class="card">
+      <h3>Products</h3>
+      <p>{{ products }} active styles</p>
+      <a href="{{ url_for('products') }}" class="link-btn">Manage Products</a>
+    </div>
+
+    <div class="card">
+      <h3>Site Traffic</h3>
+      <p>2,453 visits this week</p>
+      <a href="#" class="link-btn">Analytics</a>
+    </div>
+  </div>
+</body>
+</html>

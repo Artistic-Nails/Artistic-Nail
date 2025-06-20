@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  font-family: "Fredoka", sans-serif;
+  background: #fbb8cc url("auth-background.png") no-repeat right bottom;
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #7c3b51;
+}
+
+.auth-container {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 40px;
+  width: 350px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #b44666;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #d47995;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #c26484;
+}
+
+.toggle-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9em;
+}
+
+.toggle-link a {
+  color: #b44666;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.toggle-link a:hover {
+  text-decoration: underline;
+}

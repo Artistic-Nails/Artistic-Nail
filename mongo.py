@@ -1,38 +1,41 @@
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
-from bson.binary import Binary
-import os
+import cloudinary
+import cloudinary.uploader
+from pymongo import MongoClient
 
-uri = "mongodb+srv://nevarycolab:1F0J6rXtdrC0zi1X@cluster0.ohuk50d.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+# Configure Cloudinary
+cloudinary.config(
+    cloud_name='dw3qxw3vs',
+    api_key='425953968713555',
+    api_secret='xj7e2GXtmQa-Yh02abBTxBi7t30'
+)
 
-client = MongoClient(uri, server_api=ServerApi('1'))
-
-# try:
-#     client.admin.command('ping')
-#     print("Pinged your deployment. You successfully connected to MongoDB!")
-# except Exception as e:
-#     print(e)
-
-db = client["nailArt"]
+# MongoDB Atlas setup
+uri = "mongodb+srv://artisticnailsbyharman:QLbPCWSz9VHKnO3t@cluster0.mbnwbwo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+client = MongoClient(uri)
+db = client["ArtisticNails"]
 collection = db["Products"]
 
+# Function to insert product using a Flask-uploaded image
+def insert_product(shape, colour, design, price, image):
+    try:
+        # Upload directly from FileStorage object
+        upload_result = cloudinary.uploader.upload(image)
+        image_url = upload_result['secure_url']
 
-def insert_product(image_path):
-    with open(image_path, "rb") as img_file:
-        image_binary = Binary(img_file.read())
+        # Create product dictionary
+        product = {
+            "shape": shape.capitalize(),
+            "colour": colour.capitalize(),
+            "design": design.capitalize(),
+            "custom": False,
+            "price": float(price),
+            "image": image_url
+        }
 
-    product = {
-        "shape": "Almond",
-        "colour": "Black",
-        "design": "Butterfly",
-        "custom": "No",
-        "price": 149.99,
-        "stock_count": 20,
-        "image": image_binary
-    }
+        result = collection.insert_one(product)
+        print(f"✅ Inserted as {result.inserted_id}")
+        return True
 
-    result = collection.insert_one(product)
-    print("Inserted with ID:", result.inserted_id)
-
-# Example usage
-insert_product("static/images/black/design6.png")
+    except Exception as e:
+        print(f"❌ Failed to upload or insert: {e}")
+        return False

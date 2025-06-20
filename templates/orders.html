@@ -1,0 +1,43 @@
+<!-- Admin Orders Page -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Orders</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../static/css/orders.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <h1>Admin Dashboard</h1>
+      <span>Welcome, Admin</span>
+    </header>
+
+    <div class="orders-section">
+      {% for order in orders %}
+      <div class="order-card">
+        <div class="order-header">
+          <h2>Order #{{ order['_id'] }}</h2>
+          <span>Status: <strong>{{ order['status'] }}</strong></span>
+        </div>
+        <div class="order-details">
+          <p><strong>Customer:</strong> {{ order['username'] }}</p>
+          <p><strong>Items:</strong></p>
+          <ul>
+            {% for product in order['products'] %}
+            <li>
+              {{ product['shape'] }} {{ product['design'] }} {{
+              product['colour'] }} ♥ (₹{{ product['price'] }})
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>

@@ -6,12 +6,18 @@ body {
   color: #7c3b51;
 }
 
+
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px 40px;
   font-size: 1.2em;
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
 
 .icons {
@@ -82,10 +88,12 @@ header {
 
 .remove {
   position: absolute;
+  color: white;
   top: 10px;
   right: 10px;
   font-size: 1.2em;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .coupon-section {
@@ -100,10 +108,13 @@ header {
 .best-coupon {
   background: white;
   border-left: 6px solid #d47995;
+  border-right: 6px solid #d47995;
   padding: 10px 15px;
   font-weight: bold;
   color: #b44666;
+  box-shadow: 6px 6px 10px 0 #d47995;
 }
+
 
 .container {
   position: relative;
@@ -141,5 +152,15 @@ header {
 
 .icon {
   font-size: 3rem;
+  cursor: pointer;
+}
+
+.buy-now {
+  background: transparent;
+  border: none;
+  width: 50%;
+}
+
+.buy-now :hover {
   cursor: pointer;
 }

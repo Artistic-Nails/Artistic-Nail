@@ -4,13 +4,12 @@ from werkzeug.security import check_password_hash
 import os
 from classes import User
 
-uri = "mongodb+srv://nevarycolab:1F0J6rXtdrC0zi1X@cluster0.ohuk50d.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+uri = "mongodb+srv://artisticnailsbyharman:QLbPCWSz9VHKnO3t@cluster0.mbnwbwo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 client = MongoClient(uri)
-db = client['nailArt']
+db = client['ArtisticNails']
 collection = db["Customers"]
 
-def checkUser(data):
-    email = data.get("email")
+def checkUser(email):
     user = collection.find_one({"email": email})
     if user:
         print(user)

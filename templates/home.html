@@ -18,8 +18,8 @@
       </div>
       <div class="icons">
         <a href="{{ url_for('wishlist') }}"><i class="icon">❤️</i></a>
-        <a href="" style="text-decoration: none;"><i class="icon">👤</i></a>
-        <a href="" style="text-decoration: none;"><i class="icon">🛒</i></a>
+        <a href="{{ url_for('custom') }}" style="text-decoration: none"><i class="icon">👤</i></a>
+        <a href="{{ url_for('checkout') }}" style="text-decoration: none"><i class="icon">🛒</i></a>
       </div>
     </header>
 
@@ -29,7 +29,7 @@
         <div class="gallery-container">
           <div class="gallery">
             <!-- Repeat this card with different images -->
-             {% for product in products if product['colour'] == "Pink" %}
+            {% for product in products if product['colour'] == "Pink" %}
             <div class="card">
               <img
                 src="{{ product['image'] }}"
@@ -37,9 +37,12 @@
                 class="gallery-image"
               />
               <div class="card-footer">
-                <span class="heart">❤️</span>
+                <a href="{{ url_for('add_to_wishlist', pid=product['_id']) }}"
+                  ><span class="heart">❤️</span></a
+                >
                 <button class="buy-btn">
-                  Buy Now for {{ product['price'] }} <span class="cart">🛒</span>
+                  Buy Now for {{ product['price'] }}
+                  <a href="{{ url_for('add_to_cart', pid=product['_id']) }}"><span class="cart">🛒</span></a>
                 </button>
               </div>
             </div>
@@ -57,202 +60,36 @@
             <div class="card">
               <img src="{{ product['image'] }}" alt="Nail Design" />
               <div class="card-footer">
-                <span class="heart">❤️</span>
+                <a href="{{ url_for('add_to_wishlist', pid=product['_id']) }}"
+                  ><span class="heart">❤️</span></a
+                >
                 <button class="buy-btn">
                   Buy Now for {{product['price']}} <span class="cart">🛒</span>
                 </button>
               </div>
             </div>
             {% endfor %}
-            
           </div>
         </div>
       </section>
 
       <section class="collection">
-        <h2>Cool Blues</h2>
+        <h2>Blackout Babe</h2>
         <div class="gallery-container">
           <div class="gallery">
+            {% for product in products if product['colour'] == "Blue" %}
             <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
+              <img src="{{ product['image'] }}" alt="Nail Design" />
               <div class="card-footer">
-                <span class="heart">❤️</span>
+                <a href="{{ url_for('add_to_wishlist', pid=product['_id']) }}"
+                  ><span class="heart">❤️</span></a
+                >
                 <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
+                  Buy Now for {{product['price']}} <span class="cart">🛒</span>
                 </button>
               </div>
             </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
-            <div class="card">
-              <img src="../static/images/blue/design1.png" alt="Nail Design" />
-              <div class="card-footer">
-                <span class="heart">❤️</span>
-                <button class="buy-btn">
-                  Buy Now <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            <!-- Repeat as needed -->
+            {% endfor %}
           </div>
         </div>
       </section>

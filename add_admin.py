@@ -5,19 +5,18 @@ import bcrypt
 uri = "mongodb+srv://artisticnailsbyharman:QLbPCWSz9VHKnO3t@cluster0.mbnwbwo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 client = MongoClient(uri, server_api=ServerApi('1'))
 db = client["ArtisticNails"]
-customers = db["Customers"]
+customers = db["Admins"]
 
-def addUser(username, email, phone, address,cart):
+def addAdmin(username, email, password):
 
     user = {
         "username": username,
         "email": email,
-        "phone": phone,
-        "address": address,
-        "wishlist": [],
-        "cart": cart
+        "password": bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
     }
 
     result = customers.insert_one(user)
     user["_id"] = result.inserted_id
     return user
+
+addAdmin("Nevary", "aryanmanchanda@hotmail.com", "123456")
