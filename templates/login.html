@@ -14,6 +14,7 @@
   <body>
     <div class="auth-container">
       <h2>Login to Nail It</h2>
+      <h3>Only For Admins</h3>
       <form id="loginForm" method="POST" action="/login">
         <input
           type="email"
@@ -31,17 +32,6 @@
         />
         <button type="submit">Login</button>
       </form>
-      {% with messages = get_flashed_messages(with_categories=true) %} {% if
-      messages %}
-      <ul class="flashes">
-        {% for category, message in messages %}
-        <li class="{{ category }}">{{ message }}</li>
-        {% endfor %}
-      </ul>
-      {% endif %} {% endwith %}
-      <div class="toggle-link">
-        Don't have an account? <a href="register.html">Register</a>
-      </div>
     </div>
   </body>
 </html>

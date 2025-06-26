@@ -40,16 +40,17 @@ def insert_product(shape, colour, design, price, image):
         print(f"❌ Failed to upload or insert: {e}")
         return False
     
-def insert_custom_product(shape, colour):
+def insert_custom_product(shape, colour, price, design="", image="https://res.cloudinary.com/dbp6sexpx/image/upload/v1750451063/ChatGPT_Image_Jun_21_2025_HTML_CSS_Code_e6qbad.png", instructions=""):
     try:
         # Create product dictionary
         product = {
             "shape": shape.capitalize(),
             "colour": colour.capitalize(),
-            "design": "",
+            "design": design,
             "custom": True,
-            "price": 150,
-            "image": "https://res.cloudinary.com/dbp6sexpx/image/upload/v1750451063/ChatGPT_Image_Jun_21_2025_HTML_CSS_Code_e6qbad.png"
+            "price": price,
+            "image": image,
+            "instructions": instructions
         }
 
         result = collection.insert_one(product)
@@ -59,3 +60,10 @@ def insert_custom_product(shape, colour):
     except Exception as e:
         print(f"❌ Failed to upload or insert: {e}")
         return False
+    
+
+def upload_image(image):
+    upload_result = cloudinary.uploader.upload(image)
+    image_url = upload_result['secure_url']
+
+    return image_url

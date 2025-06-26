@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register - Nail It</title>
+    <title>Add Your Details - Nail It</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
       rel="stylesheet"
@@ -45,19 +45,8 @@
           name="address"
           required
         ></textarea>
-        <button type="submit">Register</button>
+        <button type="submit">Order Now</button>
       </form>
-      {% with messages = get_flashed_messages(with_categories=true) %} {% if
-      messages %}
-      <ul class="flashes">
-        {% for category, message in messages %}
-        <li class="{{ category }}">{{ message }}</li>
-        {% endfor %}
-      </ul>
-      {% endif %} {% endwith %}
-      <div class="toggle-link">
-        Already have an account? <a href="login.html">Login</a>
-      </div>
     </div>
   </body>
 </html>

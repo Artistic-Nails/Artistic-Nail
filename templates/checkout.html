@@ -18,13 +18,33 @@
         class="background-img"
       />
       <header>
-        <div>&larr; <span style="opacity: 0.5">Shopping Bag</span></div>
-      <div class="icons">
-        <a href="{{ url_for('wishlist') }}"><i class="icon">❤️</i></a>
-        <a href="{{ url_for('custom') }}"><i class="icon">👤</i></a>
-        <a href="{{ url_for('checkout') }}"><i class="icon">🛒</i></a>
-        <a href="{{ url_for('home') }}"><i class="icon">🏠</i></a>
-      </div>
+        <div><span style="opacity: 0.5">Shopping Bag</span></div>
+        <div class="icons">
+          <a href="{{ url_for('custom') }}"
+            ><img
+              src="{{ url_for('static', filename='images/icons/nail-white.png') }}"
+              class="icon"
+              alt="Custom"
+          /></a>
+          <a href="{{ url_for('login') }}"
+            ><img
+              src="{{ url_for('static', filename='images/icons/user-white.png') }}"
+              class="icon"
+              alt="Login"
+          /></a>
+          <a href="{{ url_for('checkout') }}"
+            ><img
+              src="{{ url_for('static', filename='images/icons/cart-white.png') }}"
+              class="icon"
+              alt="Cart"
+          /></a>
+          <a href="{{ url_for('home') }}"
+            ><img
+              src="{{ url_for('static', filename='images/icons/home-white.png') }}"
+              class="icon"
+              alt="Home"
+          /></a>
+        </div>
       </header>
 
       <div class="title">
@@ -42,7 +62,7 @@
             </h4>
             <p></p>
             <p>
-              {{ product['price'] }}
+              ₹{{ product['price'] }}
               <select>
                 <option>Qty: 1</option>
               </select>
@@ -57,11 +77,19 @@
         </div>
         {% endfor %}
       </div>
-          <div class="coupon-section">
+      {% if not is_cart_empty %}
+      <div class="coupon-section">
         <h3>Buy Now</h3>
-        <div style="width: 18%;"><a class="buy-now" href="{{ url_for('register') }}"><div class="best-coupon">Buy Now</div></a></div>
+        <form action="{{ url_for('register') }}" method="get">
+          <button type="submit" class="buy-now-btn">Buy Now</button>
+        </form>
       </div>
+      {% else %}
+      <div class="coupon-section">
+        <h3>Cart Empty</h3>
+        <button class="buy-now-btn disabled" disabled>Cart is empty</button>
+      </div>
+      {% endif %}
     </div>
-
   </body>
 </html>

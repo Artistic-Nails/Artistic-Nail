@@ -17,54 +17,49 @@
         <img src="../static/images/logo.png" alt="Logo" class="logo" />
       </div>
       <div class="icons">
-        <a href="{{ url_for('wishlist') }}"><i class="icon">❤️</i></a>
-        <a href="{{ url_for('custom') }}" style="text-decoration: none"><i class="icon">👤</i></a>
-        <a href="{{ url_for('checkout') }}" style="text-decoration: none"><i class="icon">🛒</i></a>
+        <a href="{{ url_for('custom') }}"
+          ><img
+            src="{{ url_for('static', filename='images/icons/nail-white.png') }}"
+            class="icon"
+            alt="Custom"
+        /></a>
+        <a href="{{ url_for('login') }}"
+          ><img
+            src="{{ url_for('static', filename='images/icons/user-white.png') }}"
+            class="icon"
+            alt="Login"
+        /></a>
+        <a href="{{ url_for('checkout') }}"
+          ><img
+            src="{{ url_for('static', filename='images/icons/cart-white.png') }}"
+            class="icon"
+            alt="Cart"
+        /></a>
+        <a href="{{ url_for('home') }}"
+          ><img
+            src="{{ url_for('static', filename='images/icons/home-white.png') }}"
+            class="icon"
+            alt="Home"
+        /></a>
       </div>
     </header>
 
     <main class="collections">
+      {% for colour, products in grouped_products.items() %} {% if products %}
       <section class="collection">
-        <h2>Pretty Pink</h2>
+        <h2>{{ colour }} Collection</h2>
         <div class="gallery-container">
           <div class="gallery">
-            <!-- Repeat this card with different images -->
-            {% for product in products if product['colour'] == "Pink" %}
-            <div class="card">
-              <img
-                src="{{ product['image'] }}"
-                alt="Nail Design"
-                class="gallery-image"
-              />
-              <div class="card-footer">
-                <a href="{{ url_for('add_to_wishlist', pid=product['_id']) }}"
-                  ><span class="heart">❤️</span></a
-                >
-                <button class="buy-btn">
-                  Buy Now for {{ product['price'] }}
-                  <a href="{{ url_for('add_to_cart', pid=product['_id']) }}"><span class="cart">🛒</span></a>
-                </button>
-              </div>
-            </div>
-            {% endfor %}
-            <!-- Repeat as needed -->
-          </div>
-        </div>
-      </section>
-
-      <section class="collection">
-        <h2>Blackout Babe</h2>
-        <div class="gallery-container">
-          <div class="gallery">
-            {% for product in products if product['colour'] == "Black" %}
+            {% for product in products %}
             <div class="card">
               <img src="{{ product['image'] }}" alt="Nail Design" />
               <div class="card-footer">
-                <a href="{{ url_for('add_to_wishlist', pid=product['_id']) }}"
-                  ><span class="heart">❤️</span></a
+                <button
+                  class="buy-btn"
+                  onclick="window.location.href='{{ url_for('add_to_cart', pid=product['_id']) }}'"
                 >
-                <button class="buy-btn">
-                  Buy Now for {{product['price']}} <span class="cart">🛒</span>
+                  Buy Now for ₹{{ product['price'] }}&nbsp;
+                  <span class="cart">🛒</span>
                 </button>
               </div>
             </div>
@@ -72,27 +67,7 @@
           </div>
         </div>
       </section>
-
-      <section class="collection">
-        <h2>Blackout Babe</h2>
-        <div class="gallery-container">
-          <div class="gallery">
-            {% for product in products if product['colour'] == "Blue" %}
-            <div class="card">
-              <img src="{{ product['image'] }}" alt="Nail Design" />
-              <div class="card-footer">
-                <a href="{{ url_for('add_to_wishlist', pid=product['_id']) }}"
-                  ><span class="heart">❤️</span></a
-                >
-                <button class="buy-btn">
-                  Buy Now for {{product['price']}} <span class="cart">🛒</span>
-                </button>
-              </div>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-      </section>
+      {% endif %} {% endfor %}
     </main>
   </body>
 </html>

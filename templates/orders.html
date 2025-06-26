@@ -9,12 +9,15 @@
       href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <link href="../static/css/orders.css" rel="stylesheet">
+    <link href="../static/css/orders.css" rel="stylesheet" />
   </head>
   <body>
     <header>
       <h1>Admin Dashboard</h1>
-      <span>Welcome, Admin</span>
+      <div class="icons">
+        <a href="{{ url_for('logout') }}"><i class="icon">🚪</i></a>
+        <a href="{{ url_for('admin') }}"><i class="icon">🏠</i></a>
+      </div>
     </header>
 
     <div class="orders-section">
@@ -30,11 +33,23 @@
           <ul>
             {% for product in order['products'] %}
             <li>
-              {{ product['shape'] }} {{ product['design'] }} {{
-              product['colour'] }} ♥ (₹{{ product['price'] }})
+              <div class="product-item">
+                <img
+                  src="{{ product['image'] }}"
+                  alt="Product Image"
+                  class="product-image"
+                />
+                <span>
+                  {{ product['shape'] }} {{ product['design'] }} {{ product['colour'] }} ♥ (₹{{ product['price'] }})
+                </span>
+                <span>{{ product['instructions'] }}</span>
+              </div>
             </li>
             {% endfor %}
           </ul>
+          <form method="POST" action="{{ url_for('complete_order', pid=order['_id']) }}">
+            <button type="submit" class="complete-btn">Mark as Completed</button>
+          </form>
         </div>
       </div>
       {% endfor %}

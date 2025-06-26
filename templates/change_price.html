@@ -1,0 +1,99 @@
+<!-- Admin Set Custom Art Prices Page -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Set Custom Art Prices</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Fredoka", sans-serif;
+        background: #fbb8cc url("pricing-bg.png") no-repeat right bottom;
+        background-size: contain;
+        color: #7c3b51;
+      }
+
+      header {
+        background: #fff;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      header h1 {
+        font-size: 1.8em;
+        color: #b44666;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        margin: 10px 0 5px;
+        font-weight: 600;
+      }
+
+      select,
+      input[type="number"] {
+        padding: 10px;
+        font-size: 1em;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+
+      button {
+        background: #d47995;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1em;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #c26484;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Set Custom Art Prices</h1>
+    </header>
+
+    <div class="container">
+      <form method="POST" action="{{ url_for('set_custom_price') }}">
+        <label for="price">Set Price (₹)</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          placeholder="e.g. 399"
+          required
+        />
+
+        <button type="submit">Update Price</button>
+      </form>
+    </div>
+  </body>
+</html>

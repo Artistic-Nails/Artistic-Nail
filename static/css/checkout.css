@@ -12,23 +12,12 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 20px 40px;
-  font-size: 1.2em;
+  font-size: 3rem;
 }
 
 a {
   color: white;
   text-decoration: none;
-}
-
-.icons {
-  display: flex;
-  gap: 20px;
-}
-
-.icons img {
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
 }
 
 .title {
@@ -49,7 +38,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 600px;
+  max-width: 60vh;
 }
 
 .cart-item {
@@ -60,11 +49,13 @@ a {
   align-items: flex-start;
   color: white;
   position: relative;
+  height: 20vh;
+  width: 70vh;
 }
 
 .cart-item img {
-  width: 70px;
-  height: 70px;
+  width: 35%;
+  height: 100%;
   border-radius: 5px;
   object-fit: cover;
   margin-right: 15px;
@@ -73,17 +64,26 @@ a {
 .cart-details {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 65%;
+  height: 100%;
 }
 
 .cart-details h4 {
   margin: 0;
-  font-size: 1em;
+  font-size: 2rem;
   font-weight: bold;
 }
 
 .cart-details p {
   margin: 3px 0;
-  font-size: 0.9em;
+  font-size: 2rem;
+}
+
+.cart-details select {
+  height: 100%;
+  border-radius: 2rem;
 }
 
 .remove {
@@ -91,7 +91,7 @@ a {
   color: white;
   top: 10px;
   right: 10px;
-  font-size: 1.2em;
+  font-size: 2rem;
   cursor: pointer;
   text-decoration: none;
 }
@@ -102,6 +102,7 @@ a {
 }
 
 .coupon-section h3 {
+  font-size: 3rem;
   margin-bottom: 10px;
 }
 
@@ -113,6 +114,12 @@ a {
   font-weight: bold;
   color: #b44666;
   box-shadow: 6px 6px 10px 0 #d47995;
+  height: 5vh;
+  width: 10vh;
+}
+
+.best-coupon p {
+  font-size: 2rem;
 }
 
 
@@ -151,8 +158,10 @@ a {
 }
 
 .icon {
-  font-size: 3rem;
+  height: 2.5rem;
+  width: 2.5rem;
   cursor: pointer;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.2));
 }
 
 .buy-now {
@@ -163,4 +172,119 @@ a {
 
 .buy-now :hover {
   cursor: pointer;
+}
+
+.buy-now-btn {
+  background-color: #d47995;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  box-shadow: 6px 6px 10px 0 #d47995;
+}
+
+.buy-now-btn:hover {
+  background-color: #c26484;
+}
+
+.buy-now-btn.disabled {
+  background-color: #d47995;
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+    font-size: 2rem;
+  }
+
+  .icons {
+    position: static;
+    margin-top: 10px;
+    justify-content: center;
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .icon {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .title {
+    font-size: 1.8em;
+    margin: 20px;
+    text-align: center;
+  }
+
+  .cart-section {
+    margin: 20px;
+    max-width: 100%;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+
+  .cart-item img {
+    width: 100%;
+    height: auto;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .cart-details {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cart-details h4 {
+    font-size: 1.5rem;
+  }
+
+  .cart-details p,
+  .cart-details select {
+    font-size: 1.2rem;
+  }
+
+  .remove {
+    top: 5px;
+    right: 10px;
+    font-size: 1.5rem;
+  }
+
+  .coupon-section {
+    margin: 20px;
+    text-align: center;
+  }
+
+  .coupon-section h3 {
+    font-size: 2rem;
+  }
+
+  .buy-now-btn {
+    font-size: 1.5rem;
+    width: 100%;
+  }
+
+  .best-coupon {
+    width: auto;
+    height: auto;
+    padding: 8px 12px;
+    font-size: 1.5rem;
+  }
 }

@@ -13,9 +13,13 @@
   <body>
     <div class="overlay">
       <div class="icons">
-        <a href="{{ url_for('wishlist') }}"><i class="icon">❤️</i></a>
-        <a href="{{ url_for('custom') }}"><i class="icon">👤</i></a>
-        <a href="{{ url_for('checkout') }}"><i class="icon">🛒</i></a>
+        <a href="{{ url_for('custom') }}"><i class="icon">💅🏻</i></a>
+        <a href="{{ url_for('login') }}" style="text-decoration: none"
+          ><i class="icon">👤</i></a
+        >
+        <a href="{{ url_for('checkout') }}" style="text-decoration: none"
+          ><i class="icon">🛒</i></a
+        >
         <a href="{{ url_for('home') }}"><i class="icon">🏠</i></a>
       </div>
 
@@ -23,35 +27,34 @@
 
       <div class="menu">
         <a href="{{ url_for('custom_shape') }}">
-        <div class="menu-item">
-          <img src="../static/images/Custom/Home/name.png" alt="Name Set" />
-          <p>Name Your Set</p>
-        </div>
+          <div class="menu-item">
+            <img src="../static/images/Custom/Home/name.png" alt="Name Set" />
+            <p>Name Your Set</p>
+          </div>
         </a>
-        <div class="menu-item">
+        <!-- <div class="menu-item">
           <img
             src="../static/images/Custom/Home/saved.png"
             alt="Saved Designs"
           />
           <p>Saved Designs</p>
-        </div>
-        <div class="menu-item">
+        </div> -->
+        <a href="{{ url_for('customer_upload') }}"><div class="menu-item">
           <img
             src="../static/images/Custom/Home/upload.png"
             alt="Upload Design"
           />
           <p>Upload Design</p>
-        </div>
-        <div class="menu-item">
+        </div></a>
+        <a href="{{ url_for('surprise') }}"><div class="menu-item">
           <img
             src="../static/images/Custom/Home/surprise.png"
             alt="Surprise Me"
           />
           <p>Surprise Me</p>
-        </div>
+        </div></a>
       </div>
     </div>
 
-    <div class="arrow-btn">&#8250;</div>
   </body>
 </html>

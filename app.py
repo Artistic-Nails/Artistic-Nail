@@ -1,3 +1,4 @@
+from collections import defaultdict
 from flask import Flask, render_template, redirect, url_for, request, jsonify, flash, session
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
@@ -6,13 +7,22 @@ from wtforms.validators import DataRequired, Length, EqualTo, Email
 from werkzeug.security import check_password_hash
 from flask_bcrypt import Bcrypt
 from mongoload import getProducts, getOrders
-from mongo import insert_product, insert_custom_product
+from mongo import insert_product, insert_custom_product, upload_image
 from check_user import checkUser
 from add_user import addUser
 from classes import User, Admin
 import bcrypt as bc
 from bson import ObjectId
 from pymongo import MongoClient
+import random
+from bson.errors import InvalidId
+
+def is_valid_objectid(oid):
+    try:
+        ObjectId(oid)
+        return True
+    except (InvalidId, TypeError):
+        return False
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "nailart"
@@ -28,6 +38,9 @@ db = client["ArtisticNails"]
 customers = db["Customers"]
 admins = db["Admins"]
 prods = db["Products"]
+
+settings = db["Settings"]
+settings.update_one({"name": "custom_price"}, {"$set": {"value": 150}}, upsert=True)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -50,18 +63,15 @@ def register():
         cart = session["cart"]
 
         if not (username and email and phone):
-            flash("Please fill in all fields", "danger")
             return redirect(url_for("register"))
 
         user_data = addUser(username, email, phone, address, cart)
 
         if "error" in user_data:
-            flash(user_data["error"], "danger")
             return redirect(url_for("register"))
 
         user = User(user_data)
         login_user(user)
-        flash("Registration successful!", "success")
         return redirect(url_for("home"))
 
     return render_template("register.html")
@@ -76,31 +86,32 @@ def login():
         if admin and bc.checkpw(password.encode("utf-8"), admin["password"]):
             user = Admin(admin)
             login_user(user)
-            flash("Logged in as admin", "success")
             return redirect(url_for("admin"))
         else:
-            flash("Invalid credentials", "danger")
             return redirect(url_for("login"))
 
     return render_template("login.html")
 
 @app.route("/home")
 def home():
-    products = getProducts()
-    return render_template("home.html", products=products)
+    all_products = getProducts()
+    non_custom_products = [p for p in all_products if p["custom"] != True]
+    grouped_products = defaultdict(list)
 
-@app.route("/wishlist")
-def wishlist():
-    user_id = current_user.id
-    user_doc = customers.find_one({"_id": ObjectId(user_id)})
+    for p in non_custom_products:
+        colour = p.get("colour", "").capitalize()
+        grouped_products[colour].append(p)
 
-    wishlist_ids = user_doc.get("wishlist", [])
+    return render_template("home.html", grouped_products=grouped_products)
 
-    object_ids = [ObjectId(pid) for pid in wishlist_ids]
 
-    wishlist_products = db.Products.find({"_id": {"$in": object_ids}})
-    print(wishlist_products)
-    return render_template("wishlist.html", products=wishlist_products)
+@app.route("/instructions")
+def instructions():
+    return render_template("instructions.html")
+
+@app.route("/customer_upload")
+def customer_upload():
+    return render_template("customer_upload.html")
 
 @app.route("/custom")
 def custom():
@@ -121,15 +132,14 @@ def custom_finish():
 
 @app.route("/checkout")
 def checkout():
-    if current_user.is_authenticated:
-        cart_ids = customers.find_one({"_id": ObjectId(current_user.id)}).get("cart", [])
-    else:
-        cart_ids = session.get("cart", [])
+    cart_ids = session.get("cart", [])
 
-    object_ids = [ObjectId(pid) for pid in cart_ids]
-    cart_products = db.Products.find({"_id": {"$in": object_ids}})
+    # ✅ Filter only valid ObjectIds
+    object_ids = [ObjectId(pid) for pid in cart_ids if is_valid_objectid(pid)]
 
-    return render_template("checkout.html", products=cart_products)
+    cart_products = list(db.Products.find({"_id": {"$in": object_ids}}))
+
+    return render_template("checkout.html", products=cart_products, is_cart_empty = len(cart_products) == 0)
 
 @app.route("/admin")
 @login_required
@@ -152,7 +162,7 @@ def see_orders():
         product_objects = []
 
         if cart_ids:
-            object_ids = [ObjectId(pid) for pid in cart_ids]
+            object_ids = [ObjectId(pid) for pid in cart_ids if is_valid_objectid(pid)]
             product_cursor = db.Products.find({"_id": {"$in": object_ids}})
             product_objects = list(product_cursor)
 
@@ -167,12 +177,16 @@ def products():
     products = getProducts()
     return render_template('products.html', products=products)
 
+@app.route("/change_price")
+@login_required
+def change_price():
+    return render_template("change_price.html")
+
 @app.route("/add_to_wishlist")
 def add_to_wishlist():
     pid = request.args.get("pid")
 
     if not pid:
-        flash("Invalid product ID", "danger")
         return redirect(url_for("home"))
 
     user_id = current_user.id
@@ -186,11 +200,6 @@ def add_to_wishlist():
                 {"_id": ObjectId(user_id)},
                 {"$set": {"wishlist": wishlist}}
             )
-            flash("Added to wishlist", "success")
-        else:
-            flash("Already in wishlist", "info")
-    else:
-        flash("User not found", "danger")
 
     return redirect(url_for("home"))
 
@@ -202,18 +211,15 @@ def remove_from_wishlist():
             {"_id": ObjectId(current_user.id)},
             {"$pull": {"wishlist": pid}}
         )
-        flash("Removed from wishlist", "info")
     return redirect(url_for("wishlist"))
 
 @app.route("/add_to_cart")
 def add_to_cart():
     pid = request.args.get("pid")
     if not pid:
-        flash("Invalid product ID", "danger")
         return redirect(url_for("home"))
 
     if current_user.is_authenticated:
-        # Logged-in user cart in MongoDB
         user_id = current_user.id
         user_doc = customers.find_one({"_id": ObjectId(user_id)})
 
@@ -221,9 +227,6 @@ def add_to_cart():
         if pid not in cart:
             cart.append(pid)
             customers.update_one({"_id": ObjectId(user_id)}, {"$set": {"cart": cart}})
-            flash("Added to cart", "success")
-        else:
-            flash("Already in cart", "info")
     else:
         if "cart" not in session:
             session["cart"] = []
@@ -231,9 +234,6 @@ def add_to_cart():
         if pid not in session["cart"]:
             session["cart"].append(pid)
             session.modified = True
-            flash("Added to cart (guest)", "success")
-        else:
-            flash("Already in cart (guest)", "info")
 
     return redirect(url_for("home"))
 
@@ -241,24 +241,17 @@ def add_to_cart():
 def remove_from_cart():
     pid = request.args.get("pid")
     if not pid:
-        flash("Invalid product ID", "danger")
         return redirect(url_for("checkout"))
 
     if current_user.is_authenticated:
-        # Logged-in user: remove from MongoDB cart
         customers.update_one(
             {"_id": ObjectId(current_user.id)},
             {"$pull": {"cart": pid}}
         )
-        flash("Removed from cart", "info")
     else:
-        # Guest user: remove from session cart
         if "cart" in session and pid in session["cart"]:
             session["cart"].remove(pid)
             session.modified = True
-            flash("Removed from cart (guest)", "info")
-        else:
-            flash("Item not in cart (guest)", "warning")
 
     return redirect(url_for("checkout"))
 
@@ -292,36 +285,87 @@ def save_shape():
     session["custom"] = {}
     session["custom"]["shape"] = selected_shape
 
-    # Save it to session or DB if needed
-    # session['shape'] = selected_shape
-
-    return redirect(url_for('custom_colour'))  # or render a page
+    return redirect(url_for('custom_colour'))
 
 @app.route('/save_colour', methods=['GET', 'POST'])
 def save_colour():
     selected_colour = request.form.get('selected_shape')
-    print("User selected colour:", selected_colour)
     session["custom"]["colour"] = selected_colour
-    print(session["custom"])
     session.modified = True
 
-    # Save it to session or DB if needed
-    # session['shape'] = selected_shape
-
-    return redirect(url_for('custom_finish'))  # or render a page
+    return redirect(url_for("custom_finish"))
 
 @app.route('/add_custom')
 def add_custom():
     custom_products = session["custom"]
-    insert_custom_product(custom_products["shape"], custom_products["colour"])
+    insert_custom_product(custom_products["shape"], custom_products["colour"], price=get_custom_price())
     return redirect(url_for("custom_finish"))
 
 @app.route("/add_custom_cart")
 def add_custom_cart():
     custom_products = session["custom"]
-    pid = insert_custom_product(custom_products["shape"], custom_products["colour"])
+    pid = insert_custom_product(custom_products["shape"], custom_products["colour"], price=get_custom_price())
 
     return redirect(url_for("add_to_cart", pid=pid))
+
+@app.route('/complete_order', methods=["GET", "POST"])
+def complete_order():
+    pid = request.args.get("pid")
+    if pid:
+        pid = ObjectId(pid)
+        customers.delete_one({"_id": pid})
+
+    return redirect(url_for("see_orders"))
+
+@app.route('/surprise_me')
+def surprise():
+    shapes = ["stiletto", "round", "almond", "ballerina", "square", "coffin"]
+    colours = ["red", "blue", "green", "pink", "purple", "yellow"]
+    session["custom"] = {"shape": random.choice(shapes), "colour": random.choice(colours)}
+    session.modified = True
+    custom_products = session["custom"]
+    pid = insert_custom_product(custom_products["shape"], custom_products["colour"], price=get_custom_price())
+
+    return redirect(url_for("add_to_cart", pid=pid))
+
+@app.route("/custom_order", methods=["GET", "POST"])
+def custom_order():
+    shape = request.form.get("shape")
+    design = request.form.get("design")
+    colour = request.form.get("colour")
+    image = request.files.get("image")
+
+    if shape and design and colour and image:
+        pid = insert_custom_product(shape, colour, design, upload_image(image), price=get_custom_price())
+        return redirect(url_for('add_to_cart', pid=pid))
+    
+    return redirect(url_for('customer_upload'))
+
+@app.route("/add_custom_instructions", methods=["GET", "POST"])
+def add_custom_instructions():
+    ins = request.form.get("instructions")
+    session["custom"]["instructions"] = ins
+    session.modified = True
+    custom_products = session["custom"]
+    pid = insert_custom_product(custom_products["shape"], custom_products["colour"], instructions=custom_products["instructions"], price=get_custom_price())
+
+    return redirect(url_for("add_to_cart", pid=pid))
+
+
+@app.route("/set_custom_price", methods=["POST"])
+@login_required
+def set_custom_price():
+    try:
+        new_price = float(request.form.get("price"))
+        db.Settings.update_one({"name": "custom_price"}, {"$set": {"value": new_price}}, upsert=True)
+    except (ValueError, TypeError):
+        flash("Invalid price", "error")
+    return redirect(url_for('admin'))
+
+# Function to get latest price
+def get_custom_price():
+    doc = db.Settings.find_one({"name": "custom_price"})
+    return doc["value"] if doc else 150
 
 @app.route("/logout")
 def logout():

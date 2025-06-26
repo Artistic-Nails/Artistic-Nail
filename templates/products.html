@@ -1,56 +1,101 @@
-<!-- Manage Products Page -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manage Products - Admin</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
-  <link href="../static/css/products.css" rel="stylesheet">
-</head>
-<body>
-  <header>
-    <h1>Manage Products</h1>
-    <span>Admin Panel</span>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Products - Admin</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../static/css/products.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1>Manage Products</h1>
+      <div class="icons">
+        <a href="{{ url_for('logout') }}"><i class="icon">🚪</i></a>
+        <a href="{{ url_for('admin') }}"><i class="icon">🏠</i></a>
+      </div>
+    </header>
 
-  <div class="container">
-    <div class="product-form">
-      <h2>Add New Product</h2>
-      <form id="addProductForm" enctype="multipart/form-data" method="POST" action="{{ url_for('add_product') }}">
-        <label for="shape">Shape:</label>
-        <select id="shape" name="shape" required>
-          <option value="">Select Shape</option>
-          <option value="stiletto">Stiletto</option>
-          <option value="almond">Almond</option>
-          <option value="square">Square</option>
-          <option value="round">Round</option>
-          <option value="coffin">Coffin</option>
-          <option value="ballerina">Ballerina</option>
-        </select>
+    <div class="container">
+      <div class="product-form">
+        <h2>Add New Product</h2>
+        <form
+          id="addProductForm"
+          enctype="multipart/form-data"
+          method="POST"
+          action="{{ url_for('add_product') }}"
+        >
+          <label for="shape">Shape:</label>
+          <select id="shape" name="shape" required>
+            <option value="">Select Shape</option>
+            <option value="stiletto">Stiletto</option>
+            <option value="almond">Almond</option>
+            <option value="square">Square</option>
+            <option value="round">Round</option>
+            <option value="coffin">Coffin</option>
+            <option value="ballerina">Ballerina</option>
+          </select>
 
-        <input type="text" id="colour" name="colour" placeholder="Colour" required />
-        <input type="text" id="design" name="design" placeholder="Design" required />
-        <input type="number" id="price" name="price" placeholder="Price ($)" required />
+          <input
+            type="text"
+            id="colour"
+            name="colour"
+            placeholder="Colour"
+            required
+          />
+          <input
+            type="text"
+            id="design"
+            name="design"
+            placeholder="Design"
+            required
+          />
+          <input
+            type="number"
+            id="price"
+            name="price"
+            placeholder="Price ($)"
+            required
+          />
 
-        <label for="image">Upload Image:</label>
-        <input type="file" id="image" name="image" accept="image/*" required />
+          <label for="image">Upload Image:</label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            accept="image/*"
+            required
+          />
 
-        <button type="submit">Add Product</button>
-      </form>
-    </div>
+          <button type="submit">Add Product</button>
+        </form>
+      </div>
 
-    <div class="product-list">
-      <h2>Existing Products</h2>
-      <div id="productList">
-        {% for product in products %}
-        <div class="product-item">
-          <span><span class="product-name">{{ product['shape'] }} {{ product['design'] }} {{ product['colour'] }}</span> <span class="product-price">{{ product['price'] }}</span></span>
-          <button class="remove-btn" onclick="window.location.href='{{ url_for('remove_product', pid=product['_id']) }}'">Remove</button>
+      <div class="product-list">
+        <h2>Existing Products</h2>
+        <div id="productList">
+          {% for product in products %}
+          <div class="product-item">
+            <span
+              ><span class="product-name"
+                >{{ product['shape'] }} {{ product['design'] }} {{
+                product['colour'] }}</span
+              >
+              <span class="product-price">{{ product['price'] }}</span></span
+            >
+            <button
+              class="remove-btn"
+              onclick="window.location.href='{{ url_for('remove_product', pid=product['_id']) }}'"
+            >
+              Remove
+            </button>
+          </div>
+          {% endfor %}
         </div>
-        {% endfor %}
       </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>

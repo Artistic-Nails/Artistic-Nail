@@ -1,0 +1,45 @@
+<!-- Customer Custom Order Page -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Nail Order</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../static/css/customer_upload.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <h1>Place a Custom Order</h1>
+    </header>
+
+    <div class="container">
+      <form method="POST" action="{{ url_for('custom_order') }}" enctype="multipart/form-data">
+        <label for="shape">Shape</label>
+        <select id="shape" name="shape" required>
+          <option value="">Select Shape</option>
+          <option value="stiletto">Stiletto</option>
+          <option value="almond">Almond</option>
+          <option value="square">Square</option>
+          <option value="round">Round</option>
+          <option value="coffin">Coffin</option>
+          <option value="ballerina">Ballerina</option>
+        </select>
+
+        <label for="colour">Colour</label>
+        <input type="text" id="colour" name="colour" placeholder="e.g. Pastel Pink" required />
+
+        <label for="design">Design</label>
+        <input type="text" id="design" name="design" placeholder="e.g. Glitter Tips" required />
+
+        <label for="image">Reference Image</label>
+        <input type="file" id="image" name="image" accept="image/*" required />
+
+        <button type="submit">Submit Order</button>
+      </form>
+    </div>
+  </body>
+</html>

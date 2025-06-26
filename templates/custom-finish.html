@@ -13,26 +13,35 @@
   <body>
     <div class="overlay">
       <div class="icons">
-        <a href="{{ url_for('wishlist') }}"><i class="icon">❤️</i></a>
-        <a href="{{ url_for('custom') }}"><i class="icon">👤</i></a>
-        <a href="{{ url_for('checkout') }}"><i class="icon">🛒</i></a>
+        <a href="{{ url_for('custom') }}"><i class="icon">💅🏻</i></a>
+        <a href="{{ url_for('login') }}" style="text-decoration: none"
+          ><i class="icon">👤</i></a
+        >
+        <a href="{{ url_for('checkout') }}" style="text-decoration: none"
+          ><i class="icon">🛒</i></a
+        >
         <a href="{{ url_for('home') }}"><i class="icon">🏠</i></a>
       </div>
 
       <h1>Nail It Your Way!</h1>
 
       <div class="menu">
-        <div class="menu-item">
-          <img src="../static/images/Custom/Home/instructions.png" alt="Instructions" />
-          <p>Add Instructions</p>
-        </div>
-        <a href="{{ url_for('add_custom') }}"><div class="menu-item">
+        <a href="{{ url_for('instructions') }}"><div class="menu-item">
           <img
-            src="../static/images/Custom/Home/saved.png"
-            alt="Save Design"
+            src="../static/images/Custom/Home/instructions.png"
+            alt="Instructions"
           />
-          <p>Save Design</p>
+          <p>Add Instructions</p>
         </div></a>
+        <a href="{{ url_for('add_custom') }}"
+          ><div class="menu-item">
+            <img
+              src="../static/images/Custom/Home/saved.png"
+              alt="Save Design"
+            />
+            <p>Save Design</p>
+          </div></a
+        >
         <div class="menu-item">
           <img
             src="../static/images/Custom/Home/share.png"
@@ -40,13 +49,15 @@
           />
           <p>Share Design</p>
         </div>
-        <a href="{{ url_for('add_custom_cart') }}"><div class="menu-item">
-          <img
-            src="../static/images/Custom/Home/cart.png"
-            alt="Add to Cart"
-          />
-          <p>Add to Cart</p>
-        </div></a>
+        <a href="{{ url_for('add_custom_cart') }}"
+          ><div class="menu-item">
+            <img
+              src="../static/images/Custom/Home/cart.png"
+              alt="Add to Cart"
+            />
+            <p>Add to Cart</p>
+          </div></a
+        >
       </div>
     </div>
 
