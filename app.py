@@ -10,6 +10,7 @@ from mongoload import getProducts, getOrders
 from mongo import insert_product, insert_custom_product, upload_image
 from check_user import checkUser
 from add_user import addUser
+from send_message import send_order_whatsapp_message
 from classes import User, Admin
 import bcrypt as bc
 from bson import ObjectId
@@ -69,9 +70,23 @@ def register():
 
         if "error" in user_data:
             return redirect(url_for("register"))
+        
+        object_ids = [ObjectId(pid) for pid in cart if is_valid_objectid(pid)]
+        cart_products = list(db.Products.find({"_id": {"$in": object_ids}}))
 
-        user = User(user_data)
-        login_user(user)
+        # Format items for the WhatsApp message
+        items = []
+        for p in cart_products:
+            items.append({
+                "shape": p.get("shape", ""),
+                "design": p.get("design", ""),
+                "colour": p.get("colour", ""),
+                "price": p.get("price", 0)
+            })
+
+        send_order_whatsapp_message(phone_number=phone, order_id=user_data["_id"], customer_name=username, items=items, payment_qr_link="")
+        session["cart"] = []
+
         return redirect(url_for("home"))
 
     return render_template("register.html")
@@ -282,8 +297,10 @@ def add_product():
 @app.route('/save_shape', methods=['GET', 'POST'])
 def save_shape():
     selected_shape = request.form.get('selected_shape')
+    print(selected_shape)
     session["custom"] = {}
     session["custom"]["shape"] = selected_shape
+    session.modified = True
 
     return redirect(url_for('custom_colour'))
 

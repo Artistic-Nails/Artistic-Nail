@@ -101,7 +101,7 @@ header h1 {
 
 .icons {
   position: absolute;
-  top: 1rem;
+  top: 2rem;
   right: 3rem;
   display: flex;
   gap: 2rem;
@@ -114,4 +114,66 @@ header h1 {
 .icon {
   font-size: 3rem;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+  }
+
+  header h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+
+  .icons {
+    position: static;
+    margin-top: 10px;
+    gap: 1.5rem;
+  }
+
+  .icon {
+    font-size: 2rem;
+  }
+
+  .container {
+    margin: 20px auto;
+    padding: 0 15px;
+  }
+
+  .product-form,
+  .product-list {
+    padding: 20px;
+  }
+
+  .product-form h2,
+  .product-list h2 {
+    font-size: 1.2em;
+    text-align: center;
+  }
+
+  .product-form button {
+    width: 100%;
+    font-size: 1em;
+  }
+
+  .product-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .product-price {
+    margin-left: 0;
+  }
+
+  .remove-btn {
+    align-self: flex-start;
+  }
+
+  body {
+    background-size: cover; /* Ensure background image looks good on mobile */
+  }
 }

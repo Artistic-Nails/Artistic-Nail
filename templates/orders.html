@@ -15,8 +15,18 @@
     <header>
       <h1>Admin Dashboard</h1>
       <div class="icons">
-        <a href="{{ url_for('logout') }}"><i class="icon">🚪</i></a>
-        <a href="{{ url_for('admin') }}"><i class="icon">🏠</i></a>
+        <a href="{{ url_for('logout') }}"
+          ><img
+            src="{{ url_for('static', filename='images/icons/logout.png') }}"
+            class="icon"
+            alt="Custom"
+        /></a>
+        <a href="{{ url_for('admin') }}"
+          ><img
+            src="{{ url_for('static', filename='images/icons/Home Icon 50.png') }}"
+            class="icon"
+            alt="Login"
+        /></a>
       </div>
     </header>
 
@@ -25,7 +35,6 @@
       <div class="order-card">
         <div class="order-header">
           <h2>Order #{{ order['_id'] }}</h2>
-          <span>Status: <strong>{{ order['status'] }}</strong></span>
         </div>
         <div class="order-details">
           <p><strong>Customer:</strong> {{ order['username'] }}</p>
@@ -40,15 +49,21 @@
                   class="product-image"
                 />
                 <span>
-                  {{ product['shape'] }} {{ product['design'] }} {{ product['colour'] }} ♥ (₹{{ product['price'] }})
+                  {{ product['shape'] }} {{ product['design'] }} {{
+                  product['colour'] }} ♥ (₹{{ product['price'] }})
                 </span>
                 <span>{{ product['instructions'] }}</span>
               </div>
             </li>
             {% endfor %}
           </ul>
-          <form method="POST" action="{{ url_for('complete_order', pid=order['_id']) }}">
-            <button type="submit" class="complete-btn">Mark as Completed</button>
+          <form
+            method="POST"
+            action="{{ url_for('complete_order', pid=order['_id']) }}"
+          >
+            <button type="submit" class="complete-btn">
+              Mark as Completed
+            </button>
           </form>
         </div>
       </div>

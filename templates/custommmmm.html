@@ -4,55 +4,54 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nail Polish Selector</title>
-    <link rel="stylesheet" href="../static/css/custom-shape.css" />
+    <link rel="stylesheet" href="../static/css/custommm.css" />
   </head>
   <body>
     <div class="main-container">
       <!-- Left Side: Bottles -->
-      <div class="left-section"><h1>Nail It Your Way</h1></div>
+      <div class="left-section"></div>
 
       <!-- Right Side: Shape Circle -->
       <div class="right-section">
-        <form
-          method="POST"
-          action="{{ url_for('save_colour') }}"
-          id="shapeForm"
-        >
+        <form method="POST" action="{{ url_for('save_shape') }}" id="shapeForm">
           <div class="wheel-container">
             <div class="circle-container" id="circle">
-              <div class="shape center">Choose Colour</div>
+              <div class="shape center">Choose Shape</div>
 
-              <div class="shape" style="--i: 0" data-shape="blue">
+              <div class="shape" style="--i: 0" data-shape="almond">
                 <img
-                  src="../static/images/Custom/Colours/blue.png"
-                  alt="Blue"
+                  src="../static/images/Custom/Shapes/almond.png"
+                  alt="Almond"
                 />
               </div>
-              <div class="shape" style="--i: 1" data-shape="green">
+              <div class="shape" style="--i: 1" data-shape="round">
                 <img
-                  src="../static/images/Custom/Colours/green.png"
-                  alt="green"
+                  src="../static/images/Custom/Shapes/round.png"
+                  alt="Round"
                 />
               </div>
-              <div class="shape" style="--i: 2" data-shape="pink">
+              <div class="shape" style="--i: 2" data-shape="almond">
                 <img
-                  src="../static/images/Custom/Colours/pink.png"
-                  alt="pink"
+                  src="../static/images/Custom/Shapes/almond.png"
+                  alt="Almond"
                 />
               </div>
-              <div class="shape" style="--i: 3" data-shape="purple">
+              <div class="shape" style="--i: 3" data-shape="ballerina">
                 <img
-                  src="../static/images/Custom/Colours/purple.png"
-                  alt="purple"
+                  src="../static/images/Custom/Shapes/ballerina.png"
+                  alt="Ballerina"
                 />
               </div>
-              <div class="shape" style="--i: 4" data-shape="red">
-                <img src="../static/images/Custom/Colours/red.png" alt="red" />
-              </div>
-              <div class="shape" style="--i: 5" data-shape="yellow">
+              <div class="shape" style="--i: 4" data-shape="coffin">
                 <img
-                  src="../static/images/Custom/Colours/yellow.png"
-                  alt="yellow"
+                  src="../static/images/Custom/Shapes/coffin.png"
+                  alt="Coffin"
+                />
+              </div>
+              <div class="shape" style="--i: 5" data-shape="stiletto">
+                <img
+                  src="../static/images/Custom/Shapes/stiletto.png"
+                  alt="Stiletto"
                 />
               </div>
             </div>
@@ -62,8 +61,10 @@
           <input type="hidden" name="selected_shape" id="selectedShapeInput" />
 
           <!-- Submit Button -->
-          <div class="sb">
-            <button type="submit" class="sb-btn">Submit Shape</button>
+          <div style="text-align: center; margin-top: 2rem">
+            <button type="submit" style="padding: 0.5rem 1rem; font-size: 1rem">
+              Submit Shape
+            </button>
           </div>
         </form>
       </div>
@@ -125,15 +126,12 @@
 
     shapes.forEach((shape) => {
       shape.addEventListener("click", () => {
-        const hiddenInput = document.getElementById("selectedShapeInput");
-
         if (selectedShape === shape) {
           // Deselect if already selected
           shapes.forEach((s) => {
             s.classList.remove("dimmed", "selected");
           });
           selectedShape = null;
-          hiddenInput.value = ""; // Clear the hidden input
         } else {
           // Select new shape
           selectedShape = shape;
@@ -143,20 +141,8 @@
           });
           shape.classList.remove("dimmed");
           shape.classList.add("selected");
-
-          // ✅ Set the value in the hidden input for Flask
-          hiddenInput.value = shape.dataset.shape;
         }
       });
     });
-    document
-      .getElementById("shapeForm")
-      .addEventListener("submit", function (e) {
-        const hiddenInput = document.getElementById("selectedShapeInput");
-        if (!hiddenInput.value) {
-          e.preventDefault();
-          alert("Please select a colour before submitting!");
-        }
-      });
   </script>
 </html>

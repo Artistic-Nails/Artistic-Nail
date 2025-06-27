@@ -3,100 +3,159 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nail It Your Way</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inria+Serif&display=swap"
-      rel="stylesheet"
-    />
-    <link href="../static/css/custom-shape.css" rel="stylesheet" />
+    <title>Nail Polish Selector</title>
+    <link rel="stylesheet" href="../static/css/custom-shape.css" />
   </head>
   <body>
-    <div class="container">
-      <img
-        src="../static/images/custom-bg.png"
-        alt="Background"
-        class="background-img"
-      />
+    <div class="main-container">
+      <!-- Left Side: Bottles -->
+      <div class="left-section"><h1>Nail It Your Way</h1></div>
 
-      <div class="text-heading">Nail It Your Way!</div>
+      <!-- Right Side: Shape Circle -->
+      <div class="right-section">
+        <form method="POST" action="{{ url_for('save_shape') }}" id="shapeForm">
+          <div class="wheel-container">
+            <div class="circle-container" id="circle">
+              <div class="shape center">Choose Shape</div>
 
-      <form id="shapeForm" method="POST" action="{{ url_for('save_shape') }}">
-        <input type="hidden" name="selected_shape" id="selectedShapeInput" />
-
-        <div class="shape-selector">
-          <h3>Select Shape</h3>
-          <div class="shape-grid">
-            <div class="shape-button" data-shape="square">
-              <img src="../static/images/Custom/Shapes/square.png" />
-            </div>
-            <div class="shape-button" data-shape="round">
-              <img src="../static/images/Custom/Shapes/round.png" />
-            </div>
-            <div class="shape-button" data-shape="almond">
-              <img src="../static/images/Custom/Shapes/almond.png" />
-            </div>
-            <div class="shape-button" data-shape="ballerina">
-              <img src="../static/images/Custom/Shapes/ballerina.png" />
-            </div>
-            <div class="shape-button" data-shape="coffin">
-              <img src="../static/images/Custom/Shapes/coffin.png" />
-            </div>
-            <div class="shape-button" data-shape="stiletto">
-              <img src="../static/images/Custom/Shapes/stiletto.png" />
+              <div class="shape" style="--i: 0" data-shape="almond">
+                <img
+                  src="../static/images/Custom/Shapes/almond.png"
+                  alt="Almond"
+                />
+              </div>
+              <div class="shape" style="--i: 1" data-shape="round">
+                <img
+                  src="../static/images/Custom/Shapes/round.png"
+                  alt="Round"
+                />
+              </div>
+              <div class="shape" style="--i: 2" data-shape="square">
+                <img
+                  src="../static/images/Custom/Shapes/square.png"
+                  alt="Square"
+                />
+              </div>
+              <div class="shape" style="--i: 3" data-shape="ballerina">
+                <img
+                  src="../static/images/Custom/Shapes/ballerina.png"
+                  alt="Ballerina"
+                />
+              </div>
+              <div class="shape" style="--i: 4" data-shape="coffin">
+                <img
+                  src="../static/images/Custom/Shapes/coffin.png"
+                  alt="Coffin"
+                />
+              </div>
+              <div class="shape" style="--i: 5" data-shape="stiletto">
+                <img
+                  src="../static/images/Custom/Shapes/stiletto.png"
+                  alt="Stiletto"
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        <button type="submit" class="arrow-button">&#8250;</button>
-            </form>
+          <!-- Hidden input for selected shape -->
+          <input type="hidden" name="selected_shape" id="selectedShapeInput" />
+
+          <!-- Submit Button -->
+          <div class="sb">
+            <button type="submit" class="sb-btn">Submit Shape</button>
+          </div>
+        </form>
+      </div>
     </div>
   </body>
   <script>
-      const shapeGrid = document.querySelector(".shape-grid");
-      let isDragging = false;
-      let lastAngle = 0;
-      let startAngle = 0;
+    const circle = document.getElementById("circle");
+    let isDragging = false;
+    let startAngle = 0;
+    let currentRotation = 0;
 
-      const getAngle = (e) => {
-        const rect = shapeGrid.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const x = e.clientX - cx;
-        const y = e.clientY - cy;
-        return Math.atan2(y, x) * (180 / Math.PI);
-      };
+    const getAngle = (x, y, centerX, centerY) => {
+      return Math.atan2(y - centerY, x - centerX) * (180 / Math.PI);
+    };
 
-      shapeGrid.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        startAngle = getAngle(e) - lastAngle;
-      });
+    const startDrag = (e) => {
+      isDragging = true;
+      const { clientX, clientY } = e.touches ? e.touches[0] : e;
+      const rect = circle.getBoundingClientRect();
+      startAngle =
+        getAngle(
+          clientX,
+          clientY,
+          rect.left + rect.width / 2,
+          rect.top + rect.height / 2
+        ) - currentRotation;
+    };
 
-      document.addEventListener("mousemove", (e) => {
-        if (!isDragging) return;
-        const angle = getAngle(e) - startAngle;
-        shapeGrid.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-        lastAngle = angle;
-      });
+    const drag = (e) => {
+      if (!isDragging) return;
+      const { clientX, clientY } = e.touches ? e.touches[0] : e;
+      const rect = circle.getBoundingClientRect();
+      const angle = getAngle(
+        clientX,
+        clientY,
+        rect.left + rect.width / 2,
+        rect.top + rect.height / 2
+      );
+      currentRotation = angle - startAngle;
+      circle.style.transform = `rotate(${currentRotation}deg)`;
+    };
 
-      document.addEventListener("mouseup", () => {
-        isDragging = false;
-      });
-    const shapeButtons = document.querySelectorAll(".shape-button");
-    const selectedShapeInput = document.getElementById("selectedShapeInput");
+    const stopDrag = () => {
+      isDragging = false;
+    };
 
-    shapeButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        shapeButtons.forEach((btn) => {
-          btn.classList.remove("selected");
-          btn.classList.add("greyed-out");
-        });
+    // Mouse
+    circle.addEventListener("mousedown", startDrag);
+    window.addEventListener("mousemove", drag);
+    window.addEventListener("mouseup", stopDrag);
 
-        button.classList.add("selected");
-        button.classList.remove("greyed-out");
+    // Touch
+    circle.addEventListener("touchstart", startDrag);
+    window.addEventListener("touchmove", drag);
+    window.addEventListener("touchend", stopDrag);
 
-        const shapeValue = button.getAttribute("data-shape");
-        selectedShapeInput.value = shapeValue;
+    const shapes = document.querySelectorAll(".shape");
+    let selectedShape = null;
+
+    shapes.forEach((shape) => {
+      shape.addEventListener("click", () => {
+        const hiddenInput = document.getElementById("selectedShapeInput");
+
+        if (selectedShape === shape) {
+          // Deselect if already selected
+          shapes.forEach((s) => {
+            s.classList.remove("dimmed", "selected");
+          });
+          selectedShape = null;
+          hiddenInput.value = ""; // Clear the hidden input
+        } else {
+          // Select new shape
+          selectedShape = shape;
+          shapes.forEach((s) => {
+            s.classList.remove("selected");
+            s.classList.add("dimmed");
+          });
+          shape.classList.remove("dimmed");
+          shape.classList.add("selected");
+
+          // ✅ Set the value in the hidden input for Flask
+          hiddenInput.value = shape.dataset.shape;
+        }
       });
     });
+    document
+      .getElementById("shapeForm")
+      .addEventListener("submit", function (e) {
+        const hiddenInput = document.getElementById("selectedShapeInput");
+        if (!hiddenInput.value) {
+          e.preventDefault();
+          alert("Please select a shape before submitting!");
+        }
+      });
   </script>
 </html>

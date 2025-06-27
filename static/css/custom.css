@@ -24,34 +24,39 @@ a {
   padding: 40px;
 }
 
-.icons-bar {
+.icons {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 1rem;
+  right: 3rem;
   display: flex;
-  gap: 20px;
+  gap: 2rem;
 }
 
-.icons-bar img {
-  width: 24px;
-  height: 24px;
+.icons a {
+  text-decoration: none;
+}
+
+.icon {
+  height: 2.5rem;
+  width: 2.5rem;
   cursor: pointer;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.2));
 }
 
 h1 {
   position: absolute;
-  right: 37vh;
-  top: 30vh;
+  right: 47vh;
+  top: 25vh;
   font-family: "Fredericka the Great", cursive;
   font-size: 3em;
   margin-bottom: 40px;
-  color: #4e2d2d;
+  color: white;
   text-align: right;
 }
 
 .menu {
   position: absolute;
-  top: 40vh;
+  top: 35vh;
   right: 40vh;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -67,6 +72,13 @@ h1 {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
   cursor: pointer;
+  height: 25vh;
+  width: 25vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
 
 .menu-item:hover {
@@ -81,6 +93,7 @@ h1 {
 .menu-item p {
   font-weight: bold;
   color: #b44666;
+  font-size: 2rem;
 }
 
 .arrow-btn {
@@ -100,19 +113,84 @@ h1 {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.icons {
-  position: absolute;
-  top: 1rem;
-  right: 3rem;
-  display: flex;
-  gap: 2rem;
+@media (max-width: 768px) {
+  body {
+    background-position: center top;
+    background-size: cover;
+  }
+
+  .overlay {
+    padding: 20px;
+    align-items: center;
+  }
+
+  .icons {
+    top: 0.5rem;
+    right: 1rem;
+    gap: 1rem;
+  }
+
+  .icon {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  h1 {
+    position: static;
+    font-size: 2rem;
+    margin-top: 4rem;
+    text-align: center;
+    right: auto;
+    top: auto;
+  }
+
+  .menu {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .menu-item {
+    width: 60vw;
+    height: auto;
+    padding: 20px;
+    gap: 1rem;
+  }
+
+  .menu-item p {
+    font-size: 1.5rem;
+  }
+
+  .arrow-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    bottom: 10px;
+    right: 10px;
+  }
 }
 
-.icons a {
-  text-decoration: none;
-}
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.6rem;
+    margin-top: 2rem;
+  }
 
-.icon {
-  font-size: 3rem;
-  cursor: pointer;
+  .menu-item {
+    width: 80vw;
+  }
+
+  .menu-item p {
+    font-size: 1.2rem;
+  }
+
+  .arrow-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
 }

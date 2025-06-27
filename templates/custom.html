@@ -13,14 +13,30 @@
   <body>
     <div class="overlay">
       <div class="icons">
-        <a href="{{ url_for('custom') }}"><i class="icon">💅🏻</i></a>
-        <a href="{{ url_for('login') }}" style="text-decoration: none"
-          ><i class="icon">👤</i></a
-        >
-        <a href="{{ url_for('checkout') }}" style="text-decoration: none"
-          ><i class="icon">🛒</i></a
-        >
-        <a href="{{ url_for('home') }}"><i class="icon">🏠</i></a>
+        <a href="{{ url_for('custom') }}"
+          ><img
+            src="{{ url_for('static', filename='images/icons/nail-white.png') }}"
+            class="icon"
+            alt="Custom"
+        /></a>
+        <a href="{{ url_for('login') }}"
+          ><img
+            src="{{ url_for('static', filename='images/icons/user-white.png') }}"
+            class="icon"
+            alt="Login"
+        /></a>
+        <a href="{{ url_for('checkout') }}"
+          ><img
+            src="{{ url_for('static', filename='images/icons/cart-white.png') }}"
+            class="icon"
+            alt="Cart"
+        /></a>
+        <a href="{{ url_for('home') }}"
+          ><img
+            src="{{ url_for('static', filename='images/icons/home-white.png') }}"
+            class="icon"
+            alt="Home"
+        /></a>
       </div>
 
       <h1>Nail It Your Way!</h1>
@@ -39,22 +55,25 @@
           />
           <p>Saved Designs</p>
         </div> -->
-        <a href="{{ url_for('customer_upload') }}"><div class="menu-item">
-          <img
-            src="../static/images/Custom/Home/upload.png"
-            alt="Upload Design"
-          />
-          <p>Upload Design</p>
-        </div></a>
-        <a href="{{ url_for('surprise') }}"><div class="menu-item">
-          <img
-            src="../static/images/Custom/Home/surprise.png"
-            alt="Surprise Me"
-          />
-          <p>Surprise Me</p>
-        </div></a>
+        <a href="{{ url_for('customer_upload') }}"
+          ><div class="menu-item">
+            <img
+              src="../static/images/Custom/Home/upload.png"
+              alt="Upload Design"
+            />
+            <p>Upload Design</p>
+          </div></a
+        >
+        <a href="{{ url_for('surprise') }}"
+          ><div class="menu-item">
+            <img
+              src="../static/images/Custom/Home/surprise.png"
+              alt="Surprise Me"
+            />
+            <p>Surprise Me</p>
+          </div></a
+        >
       </div>
     </div>
-
   </body>
 </html>

@@ -15,8 +15,18 @@
     <header>
       <h1>Admin Dashboard</h1>
       <div class="icons">
-        <a href="{{ url_for('logout') }}"><i class="icon">🚪</i></a>
-        <a href="{{ url_for('admin') }}"><i class="icon">🏠</i></a>
+        <a href="{{ url_for('logout') }}"
+          ><img
+            src="{{ url_for('static', filename='images/icons/logout.png') }}"
+            class="icon"
+            alt="Custom"
+        /></a>
+        <a href="{{ url_for('admin') }}"
+          ><img
+            src="{{ url_for('static', filename='images/icons/Home Icon 50.png') }}"
+            class="icon"
+            alt="Login"
+        /></a>
       </div>
     </header>
 

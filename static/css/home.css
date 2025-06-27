@@ -4,16 +4,27 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: "Inria Serif", serif;
   background-image: url("../images/home-bg.png");
-  background-repeat: no-repeat, no-repeat;
-  background-position: center top, center center; /* gradient, image */
-  background-attachment: scroll, fixed;
-  background-size: 100% auto, cover; /* gradient, image */
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-attachment: scroll; /* Or fixed on desktop */
   color: #5e2c3c;
   overflow-x: hidden;
+  min-height: 100vh; /* Ensures full screen height */
+  display: flex;
+  flex-direction: column;
 }
+
+
 
 a {
   text-decoration: none;
@@ -136,3 +147,87 @@ a {
   font-size: 1rem;
   color: red;
 }
+
+@media (max-width: 768px) {
+  .logo {
+    width: 60vw;
+    height: auto;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .header p {
+    font-size: 0.9rem;
+  }
+
+  .icons {
+    top: 0.5rem;
+    right: 1rem;
+    gap: 1rem;
+  }
+
+  .icon {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .drip {
+    width: 100%;
+    height: auto;
+    background-size: contain;
+  }
+
+  .collections {
+    padding: 1rem 1rem;
+  }
+
+  .collection h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    text-align: center;
+  }
+
+  .gallery {
+    gap: 0.8rem;
+  }
+
+  .card {
+    width: 40vw;
+    min-width: 40vw;
+  }
+
+  .card img {
+    height: 20vh;
+  }
+
+  .buy-btn {
+    font-size: 0.7rem;
+    padding: 0.4rem;
+  }
+
+  .heart {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 60vw;
+    min-width: 60vw;
+  }
+
+  .card img {
+    height: 18vh;
+  }
+
+  .header h1 {
+    font-size: 1.2rem;
+  }
+
+  .header p {
+    font-size: 0.8rem;
+  }
+}
+
