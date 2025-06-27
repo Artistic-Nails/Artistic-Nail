@@ -38,6 +38,8 @@
         </div>
         <div class="order-details">
           <p><strong>Customer:</strong> {{ order['username'] }}</p>
+          <p><strong>Phone Number:</strong> {{ order['phone'] }}</p>
+          <p><strong>Address:</strong> {{ order['address'] }}</p>
           <p><strong>Items:</strong></p>
           <ul>
             {% for product in order['products'] %}
