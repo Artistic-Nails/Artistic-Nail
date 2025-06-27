@@ -1,41 +1,9 @@
 from twilio.rest import Client
-
+import os
 # Twilio credentials
-account_sid = 'AC564c012a36f93023b1002d2f2c6ff4f5'
-auth_token = '7b21b2ce07ed1dad1be6033ec54cb462'
+account_sid = os.getenv("ACC_SID")
+auth_token = os.getenv("AUTH_TOKEN")
 client = Client(account_sid, auth_token)
-
-# message_text = """
-# 🛍️ Thank you for your order, {{ customer_name }}!  
-# Here are your order details:
-
-# 🧾 *Order ID:* {{ order_id }}
-
-# 📦 *Items:*
-# {% for item in items %}
-# • {{ item.shape }} {{ item.design }} {{ item.colour }} – ₹{{ item.price }}
-# {% endfor %}
-
-# 💰 *Total:* ₹{{ total }}
-
-# 🕒 Your order will be delivered within 7 working days.
-
-# 📲 *Please complete your payment using the QR code below:*
-# {{ payment_qr_link }}
-
-# If you've already paid, you can ignore this. Otherwise, kindly pay to confirm your order.
-
-# Need help? Just reply here 😊
-# """
-
-# # Send WhatsApp message
-# message = client.messages.create(
-#     from_='whatsapp:+14155238886',  # Twilio sandbox number
-#     body=message_text,
-#     to='whatsapp:+918448811928'  # Your verified number
-# )
-
-# print(f"✅ Message sent! SID: {message.sid}")
 
 def send_order_whatsapp_message(
     customer_name,

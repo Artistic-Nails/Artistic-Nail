@@ -1,16 +1,21 @@
 import cloudinary
 import cloudinary.uploader
 from pymongo import MongoClient
+import os
 
 # Configure Cloudinary
 cloudinary.config(
-    cloud_name='dbp6sexpx',
-    api_key='855881274985551',
-    api_secret='iPU73Wz1slq9EwnRQHJdAaRznKE'
+    cloud_name=os.getenv('CLOUD_NAME'),
+    api_key=os.getenv('API_KEY'),
+    api_secret=os.getenv('API_SECRET')
 )
+# "mongodb+srv://artisticnailsbyharman:QLbPCWSz9VHKnO3t@cluster0.mbnwbwo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    # cloud_name='dbp6sexpx',
+    # api_key='855881274985551',
+    # api_secret='iPU73Wz1slq9EwnRQHJdAaRznKE'
 
-# MongoDB Atlas setup
-uri = "mongodb+srv://artisticnailsbyharman:QLbPCWSz9VHKnO3t@cluster0.mbnwbwo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
+uri = os.getenv("MONGO_URI")
 client = MongoClient(uri)
 db = client["ArtisticNails"]
 collection = db["Products"]

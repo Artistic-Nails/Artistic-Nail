@@ -3,7 +3,7 @@ from pymongo.server_api import ServerApi
 from bson.binary import Binary
 import os
 
-uri = "mongodb+srv://artisticnailsbyharman:QLbPCWSz9VHKnO3t@cluster0.mbnwbwo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+uri = os.getenv("MONGO_URI")
 
 client = MongoClient(uri, server_api=ServerApi('1'))
 

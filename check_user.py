@@ -4,7 +4,7 @@ from werkzeug.security import check_password_hash
 import os
 from classes import User
 
-uri = "mongodb+srv://artisticnailsbyharman:QLbPCWSz9VHKnO3t@cluster0.mbnwbwo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+uri = os.getenv("MONGO_URI")
 client = MongoClient(uri)
 db = client['ArtisticNails']
 collection = db["Customers"]

@@ -17,6 +17,7 @@ from bson import ObjectId
 from pymongo import MongoClient
 import random
 from bson.errors import InvalidId
+import os
 
 def is_valid_objectid(oid):
     try:
@@ -27,13 +28,12 @@ def is_valid_objectid(oid):
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "nailart"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:aryan2424@localhost/vidyutam'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 login_manager = LoginManager(app)
 login_manager.init_app(app)
 bcrypt = Bcrypt(app)
 
-uri = "mongodb+srv://artisticnailsbyharman:QLbPCWSz9VHKnO3t@cluster0.mbnwbwo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+uri = os.getenv("MONGO_URI")
 client = MongoClient(uri)
 db = client["ArtisticNails"]
 customers = db["Customers"]
