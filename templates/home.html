@@ -68,6 +68,28 @@
         </div>
       </section>
       {% endif %} {% endfor %}
+      <section class="collection">
+        <h2>Custom Nails</h2>
+        <div class="gallery-container">
+          <div class="gallery">
+            <div class="card">
+              <img
+                src="https://res.cloudinary.com/dbp6sexpx/image/upload/v1750451063/ChatGPT_Image_Jun_21_2025_HTML_CSS_Code_e6qbad.png"
+                alt="Nail Design"
+              />
+              <div class="card-footer">
+                <button
+                  class="buy-btn"
+                  onclick="window.location.href='{{ url_for('custom') }}'"
+                >
+                  Customize your own for ₹{{ pr }}&nbsp;
+                  <span class="cart">🛒</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   </body>
   <script>

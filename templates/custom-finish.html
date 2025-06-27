@@ -53,7 +53,7 @@
         >
 
         <a href="{{ url_for('add_custom_cart') }}"
-          ><div class="menu-item">
+          ><div class="menu-item" id="add">
             <img
               src="../static/images/Custom/Home/cart.png"
               alt="Add to Cart"
@@ -66,4 +66,10 @@
 
     <div class="arrow-btn">&#8250;</div>
   </body>
+  <script>
+    const add = document.getElementById("add");
+    add.addEventListener("click", function (e) {
+      alert("Item has been added to your cart!");
+    });
+  </script>
 </html>

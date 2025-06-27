@@ -78,16 +78,17 @@ def register():
         items = []
         for p in cart_products:
             items.append({
-                "shape": p.get("shape", ""),
-                "design": p.get("design", ""),
-                "colour": p.get("colour", ""),
-                "price": p.get("price", 0)
-            })
+        "shape": p.get("shape", ""),
+        "design": p.get("design", ""),
+        "colour": p.get("colour", ""),
+        "price": p.get("price", 0),
+        "image": p.get("image", "")  # make sure `image` holds a URL or path
+    })
 
-        send_order_whatsapp_message(phone_number=phone, order_id=user_data["_id"], customer_name=username, items=items, payment_qr_link="")
+        send_order_whatsapp_message(phone_number=phone, order_id=user_data["_id"], customer_name=username, items=items, payment_qr_link="", recipient_email=email)
         session["cart"] = []
 
-        return redirect(url_for("home"))
+        return redirect(url_for("order_confirm", order=items))
 
     return render_template("register.html")
 
@@ -117,7 +118,9 @@ def home():
         colour = p.get("colour", "").capitalize()
         grouped_products[colour].append(p)
 
-    return render_template("home.html", grouped_products=grouped_products)
+    pr = get_custom_price()
+
+    return render_template("home.html", grouped_products=grouped_products, pr=pr)
 
 
 @app.route("/instructions")
@@ -155,6 +158,10 @@ def checkout():
     cart_products = list(db.Products.find({"_id": {"$in": object_ids}}))
 
     return render_template("checkout.html", products=cart_products, is_cart_empty = len(cart_products) == 0)
+
+@app.route("/order_confirm")
+def order_confirm():
+    return render_template("order_done.html")
 
 @app.route("/admin")
 @login_required
@@ -315,13 +322,13 @@ def save_colour():
 @app.route('/add_custom')
 def add_custom():
     custom_products = session["custom"]
-    insert_custom_product(custom_products["shape"], custom_products["colour"], price=get_custom_price())
+    insert_custom_product(shape=custom_products["shape"], colour=custom_products["colour"], price=get_custom_price())
     return redirect(url_for("custom_finish"))
 
 @app.route("/add_custom_cart")
 def add_custom_cart():
     custom_products = session["custom"]
-    pid = insert_custom_product(custom_products["shape"], custom_products["colour"], price=get_custom_price())
+    pid = insert_custom_product(shape=custom_products["shape"], colour=custom_products["colour"], price=get_custom_price())
 
     return redirect(url_for("add_to_cart", pid=pid))
 
@@ -341,7 +348,7 @@ def surprise():
     session["custom"] = {"shape": random.choice(shapes), "colour": random.choice(colours)}
     session.modified = True
     custom_products = session["custom"]
-    pid = insert_custom_product(custom_products["shape"], custom_products["colour"], price=get_custom_price())
+    pid = insert_custom_product(shape=custom_products["shape"], colour=custom_products["colour"], price=get_custom_price())
 
     return redirect(url_for("add_to_cart", pid=pid))
 
@@ -353,7 +360,7 @@ def custom_order():
     image = request.files.get("image")
 
     if shape and design and colour and image:
-        pid = insert_custom_product(shape, colour, design, upload_image(image), price=get_custom_price())
+        pid = insert_custom_product(shape=shape, colour=colour, design=design, image=upload_image(image), price=get_custom_price())
         return redirect(url_for('add_to_cart', pid=pid))
     
     return redirect(url_for('customer_upload'))

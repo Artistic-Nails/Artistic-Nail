@@ -9,41 +9,51 @@
       href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <link href="../static/css/customer_upload.css" rel="stylesheet">
+    <link href="../static/css/customer_upload.css" rel="stylesheet" />
   </head>
   <body>
     <header>
-      <h1>Place a Custom Order</h1>
-            <div class="icons">
-        <a href="{{ url_for('custom') }}"
-          ><img
-            src="{{ url_for('static', filename='images/icons/nail-white.png') }}"
-            class="icon"
-            alt="Custom"
-        /></a>
-        <a href="{{ url_for('login') }}"
-          ><img
-            src="{{ url_for('static', filename='images/icons/user-white.png') }}"
-            class="icon"
-            alt="Login"
-        /></a>
-        <a href="{{ url_for('checkout') }}"
-          ><img
-            src="{{ url_for('static', filename='images/icons/cart-white.png') }}"
-            class="icon"
-            alt="Cart"
-        /></a>
-        <a href="{{ url_for('home') }}"
-          ><img
-            src="{{ url_for('static', filename='images/icons/home-white.png') }}"
-            class="icon"
-            alt="Home"
-        /></a>
+      <div class="header-content">
+        <h1>Place a Custom Order</h1>
+        <div class="icons">
+          <a href="{{ url_for('custom') }}">
+            <img
+              src="{{ url_for('static', filename='images/icons/nail-white.png') }}"
+              class="icon"
+              alt="Custom"
+            />
+          </a>
+          <a href="{{ url_for('login') }}">
+            <img
+              src="{{ url_for('static', filename='images/icons/user-white.png') }}"
+              class="icon"
+              alt="Login"
+            />
+          </a>
+          <a href="{{ url_for('checkout') }}">
+            <img
+              src="{{ url_for('static', filename='images/icons/cart-white.png') }}"
+              class="icon"
+              alt="Cart"
+            />
+          </a>
+          <a href="{{ url_for('home') }}">
+            <img
+              src="{{ url_for('static', filename='images/icons/home-white.png') }}"
+              class="icon"
+              alt="Home"
+            />
+          </a>
+        </div>
       </div>
     </header>
 
     <div class="container">
-      <form method="POST" action="{{ url_for('custom_order') }}" enctype="multipart/form-data">
+      <form
+        method="POST"
+        action="{{ url_for('custom_order') }}"
+        enctype="multipart/form-data"
+      >
         <label for="shape">Shape</label>
         <select id="shape" name="shape" required>
           <option value="">Select Shape</option>
@@ -56,10 +66,22 @@
         </select>
 
         <label for="colour">Colour</label>
-        <input type="text" id="colour" name="colour" placeholder="e.g. Pastel Pink" required />
+        <input
+          type="text"
+          id="colour"
+          name="colour"
+          placeholder="e.g. Pastel Pink"
+          required
+        />
 
         <label for="design">Design</label>
-        <input type="text" id="design" name="design" placeholder="e.g. Glitter Tips" required />
+        <input
+          type="text"
+          id="design"
+          name="design"
+          placeholder="e.g. Glitter Tips"
+          required
+        />
 
         <label for="image">Reference Image</label>
         <input type="file" id="image" name="image" accept="image/*" required />
@@ -68,4 +90,11 @@
       </form>
     </div>
   </body>
+  <script>
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function (e) {
+      alert("Your custom order has been added to cart!");
+    });
+  </script>
 </html>

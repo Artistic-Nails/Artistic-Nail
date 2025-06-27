@@ -64,7 +64,7 @@
             <p>Upload Design</p>
           </div></a
         >
-        <a href="{{ url_for('surprise') }}"
+        <a href="{{ url_for('surprise') }} " id="surprise-btn"
           ><div class="menu-item">
             <img
               src="../static/images/Custom/Home/surprise.png"
@@ -76,4 +76,11 @@
       </div>
     </div>
   </body>
+  <script>
+    document
+      .getElementById("surprise-btn")
+      .addEventListener("click", function (e) {
+        alert("Surprise set added to cart!");
+      });
+  </script>
 </html>

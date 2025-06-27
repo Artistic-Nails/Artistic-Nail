@@ -86,11 +86,13 @@ h1 {
 }
 
 .menu-item img {
-  height: 15vh;
-  margin-bottom: 10px;
+  padding-top: 2rem;
+  height: 13vh;
+  margin-bottom: 5px;
 }
 
 .menu-item p {
+  padding-bottom: 2rem;
   font-weight: bold;
   color: #b44666;
   font-size: 2rem;

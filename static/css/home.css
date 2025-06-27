@@ -5,24 +5,25 @@
 }
 
 html, body {
-  height: 100%;
   margin: 0;
   padding: 0;
+  height: auto;
+  min-height: 100vh;
 }
 
 body {
   font-family: "Inria Serif", serif;
   background-image: url("../images/home-bg.png");
   background-repeat: no-repeat;
-  background-position: center top;
+  background-position: top center;
   background-size: cover;
-  background-attachment: scroll; /* Or fixed on desktop */
+  background-attachment: scroll; /* Keep it scrollable on all devices */
   color: #5e2c3c;
   overflow-x: hidden;
-  min-height: 100vh; /* Ensures full screen height */
   display: flex;
   flex-direction: column;
 }
+
 
 
 
@@ -214,8 +215,8 @@ a {
 
 @media (max-width: 480px) {
   .card {
-    width: 60vw;
-    min-width: 60vw;
+    width: 36vw;
+    min-width: 36vw;
   }
 
   .card img {
