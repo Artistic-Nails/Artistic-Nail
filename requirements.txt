@@ -10,6 +10,7 @@ charset-normalizer==3.4.2
 click 
 cloudinary==1.44.1
 dnspython==1.16.0
+dotenv==0.9.9
 Flask 
 Flask-Bcrypt 
 Flask-Login 
@@ -25,6 +26,7 @@ packaging==25.0
 propcache==0.3.2
 PyJWT==2.10.1
 pymongo==3.12.0
+python-dotenv==1.1.1
 requests==2.32.4
 setuptools==78.1.1
 six==1.17.0
@@ -33,4 +35,4 @@ urllib3==2.4.0
 Werkzeug 
 wheel==0.45.1
 WTForms 
-yarl==1.20
+yarl==1.20.1
