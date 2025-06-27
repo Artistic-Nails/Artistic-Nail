@@ -33,4 +33,4 @@ urllib3==2.4.0
 Werkzeug 
 wheel==0.45.1
 WTForms 
-yarl==1.20.
+yarl==1.20

@@ -1,9 +1,8 @@
 from twilio.rest import Client
 import os
-# Twilio credentials
-account_sid = os.getenv("ACC_SID")
-auth_token = os.getenv("AUTH_TOKEN")
-client = Client(account_sid, auth_token)
+from dotenv import load_dotenv
+load_dotenv()
+
 
 def send_order_whatsapp_message(
     customer_name,
@@ -11,9 +10,10 @@ def send_order_whatsapp_message(
     order_id,
     items,  # List of dicts with keys: shape, colour, design, price
     payment_qr_link,  # URL to QR code image or text
-    twilio_whatsapp_number='whatsapp:+14155238886'  # Default Twilio sandbox number
+    twilio_whatsapp_number='whatsapp:+18178666809'  # Default Twilio sandbox number
 ):
-    client = Client(account_sid, auth_token)
+    
+    client = Client("AC5406677025519f9f42b16bac363e2c1c", "131ad580c40875d129da9839da903e64")
 
     total = sum(item['price'] for item in items)
 

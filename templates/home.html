@@ -57,6 +57,7 @@
                 <button
                   class="buy-btn"
                   onclick="window.location.href='{{ url_for('add_to_cart', pid=product['_id']) }}'"
+                  id="buy"
                 >
                   Buy Now for ₹{{ product['price'] }}&nbsp;
                   <span class="cart">🛒</span>
@@ -70,4 +71,12 @@
       {% endif %} {% endfor %}
     </main>
   </body>
+  <script>
+    document
+      .getElementById("buy")
+      .addEventListener("click", function (e) {
+        const hiddenInput = document.getElementById("selectedShapeInput");
+        alert("Item Added to Cart")
+      });
+  </script>
 </html>
