@@ -10,10 +10,10 @@ def send_order_whatsapp_message(
     order_id,
     items,  # List of dicts with keys: shape, colour, design, price
     payment_qr_link,  # URL to QR code image or text
-    twilio_whatsapp_number='whatsapp:+18178666809'  # Default Twilio sandbox number
+    twilio_whatsapp_number='whatsapp:+14155238886'  # Default Twilio sandbox number
 ):
     
-    client = Client("AC5406677025519f9f42b16bac363e2c1c", "131ad580c40875d129da9839da903e64")
+    client = Client("AC5406677025519f9f42b16bac363e2c1c", "3f4f42753ddb605f5c142114619b45ff")
 
     total = sum(item['price'] for item in items)
 
