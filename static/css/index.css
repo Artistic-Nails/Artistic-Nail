@@ -52,7 +52,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 1.9rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: white;
   pointer-events: none;
@@ -70,9 +70,10 @@ body {
     position: absolute;
     bottom: 13vh;
     height: 48px;
+    width: 32vh;
   }
 
   .button-text {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 }
