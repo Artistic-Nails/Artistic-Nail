@@ -48,7 +48,12 @@
       </header>
 
       <div class="title">
-        Ready to Press, Just Checkout! <span class="sparkles">✨✨</span>
+        Ready to Press, Just Checkout!
+        <img
+          src="{{ url_for('static', filename='images/icons/sparkle.png') }}"
+          alt="Sparkle"
+          class="sparkle-icon"
+        />
       </div>
       <div class="cart-section">
         {% for product in products %}
@@ -67,7 +72,7 @@
                 <option>Qty: 1</option>
               </select>
             </p>
-            <p>✔ Delivery in 7 days</p>
+            <p>Elegance Awaits</p>
           </div>
           <div class="remove">
             <a href="{{ url_for('remove_from_cart', pid=product['_id']) }}"

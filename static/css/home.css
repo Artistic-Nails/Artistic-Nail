@@ -4,7 +4,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: auto;
@@ -12,7 +13,7 @@ html, body {
 }
 
 body {
-  font-family: "Fredoka", sans-serif;
+  font-family: Inika;
   background-image: url("../images/home-bg.png");
   background-repeat: no-repeat;
   background-position: top center;
@@ -23,9 +24,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
-
-
 
 a {
   text-decoration: none;
@@ -91,7 +89,7 @@ a {
 }
 
 .collection h2 {
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
   color: white;
 }
@@ -110,7 +108,7 @@ a {
 }
 
 .card {
-  /* background-color: #d07b91; */
+  background-color: #d07b91;
   border-radius: 10px;
   overflow: hidden;
   width: 29vh;
@@ -233,3 +231,13 @@ a {
   }
 }
 
+.fa-cart-shopping {
+  font-size: 1rem; /* Adjust as needed */
+  margin-left: 0.3rem;
+}
+
+button,
+.buy-btn {
+  font-family: "Inika";
+  font-size: 1rem;
+}

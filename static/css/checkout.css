@@ -6,8 +6,8 @@ body {
   color: #7c3b51;
 }
 
-
 header {
+  font-family: "Inria Serif";
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -21,10 +21,11 @@ a {
 }
 
 .title {
-  font-size: 2.5em;
+  font-size: 60px;
   font-weight: bold;
   margin-left: 40px;
   margin-top: 20px;
+  font-family: Hahmlet;
 }
 
 .sparkles {
@@ -42,6 +43,7 @@ a {
 }
 
 .cart-item {
+  font-family: "Orelega One";
   display: flex;
   background: #d47995;
   border-radius: 10px;
@@ -64,8 +66,9 @@ a {
 .cart-details {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start; /* Align items to the left */
   justify-content: center;
+  text-align: left;        /* Ensure text is aligned left */
   width: 65%;
   height: 100%;
 }
@@ -104,6 +107,7 @@ a {
 .coupon-section h3 {
   font-size: 3rem;
   margin-bottom: 10px;
+  font-family: "Orelega One";
 }
 
 .best-coupon {
@@ -121,7 +125,6 @@ a {
 .best-coupon p {
   font-size: 2rem;
 }
-
 
 .container {
   position: relative;
@@ -168,6 +171,7 @@ a {
   background: transparent;
   border: none;
   width: 50%;
+  
 }
 
 .buy-now :hover {
@@ -185,6 +189,7 @@ a {
   font-weight: bold;
   transition: background-color 0.3s ease;
   box-shadow: 6px 6px 10px 0 #d47995;
+  font-family: "Orelega One";
 }
 
 .buy-now-btn:hover {
@@ -197,7 +202,6 @@ a {
   cursor: not-allowed;
   box-shadow: none;
 }
-
 
 @media (max-width: 768px) {
   header {
@@ -279,6 +283,7 @@ a {
   .buy-now-btn {
     font-size: 1.5rem;
     width: 100%;
+
   }
 
   .best-coupon {

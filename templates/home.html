@@ -6,8 +6,12 @@
     <title>Artistic Nails</title>
     <link rel="stylesheet" href="../static/css/home.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inika:wght@400;600&display=swap"
       rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
   </head>
   <body>
@@ -59,7 +63,7 @@
                   onclick="window.location.href='{{ url_for('add_to_cart', pid=product['_id']) }}'"
                 >
                   Buy Now for ₹{{ product['price'] }}&nbsp;
-                  <span class="cart">🛒</span>
+                  <i class="fa-solid fa-cart-shopping"></i>
                 </button>
               </div>
             </div>
@@ -69,7 +73,7 @@
       </section>
       {% endif %} {% endfor %}
       <section class="collection">
-        <h2>Custom Nails</h2>
+        <h2>Create Your Own Nails</h2>
         <div class="gallery-container">
           <div class="gallery">
             <div class="card">
@@ -83,7 +87,7 @@
                   onclick="window.location.href='{{ url_for('custom') }}'"
                 >
                   Customize your own for ₹{{ pr }}&nbsp;
-                  <span class="cart">🛒</span>
+                  <i class="fa-solid fa-cart-shopping"></i>
                 </button>
               </div>
             </div>
