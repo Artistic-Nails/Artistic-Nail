@@ -31,7 +31,7 @@ body {
 /* SHOP NOW Button */
 .button-container {
   position: absolute;
-  bottom: 5vh;
+  bottom: 13vh;
   left: 50%;
   transform: translateX(-50%);
   width: min(90%, 320px);
@@ -67,8 +67,6 @@ body {
   }
 
   .button-container {
-    position: absolute;
-    bottom: 7.5rem;
     height: 48px;
   }
 
