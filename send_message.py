@@ -44,10 +44,10 @@ def send_order_whatsapp_message(
             
             <h3>📲 Payment Instructions:</h3>
             <p>Please scan the QR below to complete your payment:</p>
-            <img src="{payment_qr_link}" alt="Payment QR" width="180" style="margin-top:10px; border:1px solid #ccc; border-radius:8px;" />
+            <img src="https://res.cloudinary.com/dbp6sexpx/image/upload/v1751094958/WhatsApp_Image_Jun_28_2025_ht4bm0.jpg" alt="Payment QR" width="180" style="margin-top:10px; border:1px solid #ccc; border-radius:8px;" />
             
             <p>If you've already paid, you can ignore this message. Otherwise, kindly pay to confirm your order.</p>
-            <p>Need help? Just reply to this email 😊</p>
+            <p>Need help? Just message on this Whatsapp Number 😊</p>
         </body>
         </html>
     """

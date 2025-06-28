@@ -21,5 +21,5 @@ def getOrders():
     return orders
 
 def getProducts():
-    products = list(collection.find())
+    products = list(collection.find({"custom": "No"}))
     return products

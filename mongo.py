@@ -32,7 +32,7 @@ def insert_product(shape, colour, design, price, image):
             "shape": shape.capitalize(),
             "colour": colour.capitalize(),
             "design": design.capitalize(),
-            "custom": False,
+            "custom": "No",
             "price": float(price),
             "image": image_url
         }

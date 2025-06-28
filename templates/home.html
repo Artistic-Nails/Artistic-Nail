@@ -6,7 +6,7 @@
     <title>Artistic Nails</title>
     <link rel="stylesheet" href="../static/css/home.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inria+Serif&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -47,7 +47,7 @@
     <main class="collections">
       {% for colour, products in grouped_products.items() %} {% if products %}
       <section class="collection">
-        <h2>{{ colour }} Collection</h2>
+        <h2>{{ colour.title() }}</h2>
         <div class="gallery-container">
           <div class="gallery">
             {% for product in products %}
