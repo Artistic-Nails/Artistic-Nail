@@ -12,7 +12,7 @@
     <style>
       body {
         margin: 0;
-        font-family: "Fredoka", sans-serif;
+        font-family: "Orelega One";
         background: #fbb8cc url("instructions-bg.png") no-repeat right bottom;
         background-size: contain;
         color: #7c3b51;
@@ -83,11 +83,25 @@
 
     <div class="container">
       <form method="POST" action="{{ url_for('add_custom_instructions') }}">
-        <label for="instructions">Please describe your custom order in detail:</label>
-        <textarea id="instructions" name="instructions" placeholder="Include ideas about colours, patterns, references, themes, or any other details..." required></textarea>
+        <label for="instructions"
+          >Please describe your custom order in detail:</label
+        >
+        <textarea
+          id="instructions"
+          name="instructions"
+          placeholder="Include ideas about colours, patterns, references, themes, or any other details..."
+          required
+        ></textarea>
 
         <button type="submit">Add to Cart</button>
       </form>
     </div>
   </body>
+  <script>
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function (e) {
+      alert("Your order with instructions has been added to cart!");
+    });
+  </script>
 </html>

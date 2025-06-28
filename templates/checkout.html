@@ -8,6 +8,10 @@
       href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gwendolyn:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <link href="../static/css/checkout.css" rel="stylesheet" />
   </head>
   <body>
@@ -72,7 +76,7 @@
                 <option>Qty: 1</option>
               </select>
             </p>
-            <p>Elegance Awaits</p>
+            <p style="font-family: Gwendolyn;">Elegance Awaits</p>
           </div>
           <div class="remove">
             <a href="{{ url_for('remove_from_cart', pid=product['_id']) }}"

@@ -6,8 +6,8 @@ collection = db["Products"]
 
 # Change all 'pink' colours to 'light pink'
 result = collection.update_many(
-    {"colour": "Black"},
-    {"$set": {"colour": "Blackout Babe"}}
+    {"price": 149.99},
+    {"$set": {"price": 299}}
 )
 
 print(f"Modified {result.modified_count} documents.")
