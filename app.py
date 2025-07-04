@@ -40,8 +40,6 @@ customers = db["Customers"]
 admins = db["Admins"]
 prods = db["Products"]
 
-settings = db["Settings"]
-settings.update_one({"name": "custom_price"}, {"$set": {"value": 150}}, upsert=True)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -386,10 +384,10 @@ def set_custom_price():
         flash("Invalid price", "error")
     return redirect(url_for('admin'))
 
-# Function to get latest price
+
 def get_custom_price():
     doc = db.Settings.find_one({"name": "custom_price"})
-    return doc["value"] if doc else 150
+    return doc["value"]
 
 @app.route("/logout")
 def logout():
