@@ -47,7 +47,7 @@ def send_order_whatsapp_message(
             <img src="https://res.cloudinary.com/dbp6sexpx/image/upload/v1751100303/Screenshot_2025-06-28_at_2.14.39_PM_spqnxs.png" alt="Payment QR" width="180" style="margin-top:10px; border:1px solid #ccc; border-radius:8px;" />
             
             <p>If you've already paid, you can ignore this message. Otherwise, kindly pay to confirm your order.</p>
-            <p>Need help? Just message on this Whatsapp Number 😊</p>
+            <p>Need help? Just message on this Whatsapp Number 9915024883😊</p>
         </body>
         </html>
     """
