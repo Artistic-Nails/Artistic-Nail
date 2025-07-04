@@ -67,3 +67,22 @@ button:hover {
 .toggle-link a:hover {
   text-decoration: underline;
 }
+
+/* Style for size dropdown */
+select#size {
+  width: 106%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+  color: grey;
+}
+
+/* Responsive tweak for small screens */
+@media (max-width: 768px) {
+  select#size {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+}

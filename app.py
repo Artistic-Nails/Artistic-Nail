@@ -60,11 +60,12 @@ def register():
         phone = request.form.get("phone")
         address = request.form.get("address")
         cart = session["cart"]
+        size = request.form.get("size")
 
         if not (username and email and phone):
             return redirect(url_for("register"))
 
-        user_data = addUser(username, email, phone, address, cart)
+        user_data = addUser(username, email, phone, address, cart, size)
 
         if "error" in user_data:
             return redirect(url_for("register"))
@@ -80,7 +81,7 @@ def register():
         "design": p.get("design", ""),
         "colour": p.get("colour", ""),
         "price": p.get("price", 0),
-        "image": p.get("image", "")  # make sure `image` holds a URL or path
+        "image": p.get("image", ""),  # make sure `image` holds a URL or path
     })
 
         send_order_whatsapp_message(phone_number=phone, order_id=user_data["_id"], customer_name=username, items=items, payment_qr_link="", recipient_email=email)

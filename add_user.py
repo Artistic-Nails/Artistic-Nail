@@ -8,7 +8,7 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 db = client["ArtisticNails"]
 customers = db["Customers"]
 
-def addUser(username, email, phone, address,cart):
+def addUser(username, email, phone, address, cart, size):
 
     user = {
         "username": username,
@@ -16,7 +16,8 @@ def addUser(username, email, phone, address,cart):
         "phone": phone,
         "address": address,
         "wishlist": [],
-        "cart": cart
+        "cart": cart,
+        "size": size
     }
 
     result = customers.insert_one(user)
