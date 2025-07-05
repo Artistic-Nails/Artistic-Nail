@@ -86,3 +86,21 @@ select#size {
     padding: 0.5rem;
   }
 }
+
+.size-guide-btn {
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #b44666;
+  font-weight: bold;
+  text-decoration: none;
+  background: #ffe3ec;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.size-guide-btn:hover {
+  background: #fbd9e1;
+  text-decoration: underline;
+}

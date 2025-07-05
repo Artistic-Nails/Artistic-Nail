@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  font-family: "Orelega One";
+  background: #fbb8cc
+    url("{{ url_for('static', filename='images/confirmation-bg.png') }}")
+    no-repeat right bottom;
+  background-size: contain;
+  color: #7c3b51;
+  padding: 40px 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 2.2em;
+  color: #b44666;
+}
+
+.guide-container {
+  background: #fff;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+}
+
+.guide-container h2 {
+  color: #d47995;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+.guide-container p {
+  font-size: 1em;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.sizing-image {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.sizing-image img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 30px;
+  background: #d47995;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.back-link:hover {
+  background: #c26484;
+}

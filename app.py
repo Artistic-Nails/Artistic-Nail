@@ -158,6 +158,10 @@ def checkout():
 
     return render_template("checkout.html", products=cart_products, is_cart_empty = len(cart_products) == 0)
 
+@app.route("/sizes")
+def sizes():
+    return render_template("size-guide.html")
+
 @app.route("/order_confirm")
 def order_confirm():
     return render_template("order_done.html")

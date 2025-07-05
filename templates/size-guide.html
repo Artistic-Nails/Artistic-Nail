@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nail Sizing Guide</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/css/size-guide.css">
+  </head>
+  <body>
+    <header>
+      <h1>Press-On Nail Sizing Guide 💅🏻</h1>
+    </header>
+
+    <div class="guide-container">
+      <h2>How to Measure</h2>
+      <p>
+        Use a measuring tape (preferably in mm) and place it horizontally across
+        the widest part of your natural nail bed. Measure each nail individually
+        and note down the width.
+      </p>
+
+      <h2>Size Sets</h2>
+      <p>
+        <strong>XS:</strong> 3, 6, 5, 7, 9<br />
+        <strong>S:</strong> 2, 5, 4, 6, 9<br />
+        <strong>M:</strong> 1, 5, 4, 6, 8<br />
+        <strong>L:</strong> 0, 4, 3, 5, 7<br />
+        <strong>XL:</strong> 0, 3, 2, 4, 6
+      </p>  
+
+      <div class="sizing-image">
+        <img
+          src="{{ url_for('static', filename='images/nail-sizing-guide.png') }}"
+          alt="Sizing Guide"
+        />
+      </div>
+
+      <a href="{{ url_for('register') }}" class="back-link">← Back to Home</a>
+    </div>
+  </body>
+</html>
